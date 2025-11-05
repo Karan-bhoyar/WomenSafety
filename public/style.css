@@ -1,0 +1,438 @@
+body {
+  box-sizing: border-box;
+}
+
+/* ---------------- HERO SECTION ---------------- */
+.hero-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: float 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.phone-mockup {
+  transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+  transition: transform 0.3s ease;
+}
+
+.phone-mockup:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.05);
+}
+
+.feature-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.feature-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------- MODAL & TOAST ---------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  animation: toastSlideIn 0.3s ease-out;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------------- NAVIGATION ---------------- */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #f472b6;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100vh;
+  }
+  .phone-mockup {
+    transform: none;
+    max-width: 280px;
+  }
+}
+
+/* ---------------- FLOATING EFFECTS ---------------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-15px) translateX(10px); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(10px) translateX(-15px); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite; }
+.animate-float-slower { animation: float-slower 10s ease-in-out infinite; }
+
+/* ---------------- DARK FEATURE SECTION (new) ---------------- */
+.feature-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e1b4b, #312e81, #4c1d95, #7e22ce);
+  background-size: 300% 300%;
+  animation: gradient-move 12s ease infinite;
+  padding: 6rem 1rem;
+  color: white;
+}
+
+.parallax-bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.25;
+  filter: blur(20px);
+  will-change: transform;
+}
+
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------------- BOUNCE ANIMATION ---------------- */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+  50% { transform: translateY(-15px); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+
+.animate-bounce-slow {
+  animation: bounce 3s infinite;
+}
+
+/* 🌈 Animated Gradient Background for Downloadable Resources */
+.resources-bg {
+  position: relative;
+  background: linear-gradient(135deg, #d8b4fe, #fbcfe8, #fda4af, #a5b4fc);
+  background-size: 300% 300%;
+  animation: gradientShift 14s ease infinite;
+  overflow: hidden;
+}
+
+/* Background motion animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating glowing circles */
+.resources-bg::before,
+.resources-bg::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+  animation: floatBubbles 16s ease-in-out infinite;
+  z-index: 0;
+}
+
+.resources-bg::before {
+  top: -60px;
+  left: -80px;
+  animation-delay: 0s;
+}
+
+.resources-bg::after {
+  bottom: -60px;
+  right: -100px;
+  animation-delay: 8s;
+}
+
+/* Floating motion for bubbles */
+@keyframes floatBubbles {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-25px) scale(1.1); opacity: 0.9; }
+}
+
+/* Ensures section content stays above background */
+.resources-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Card Design */
+.resource-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.resource-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Download Button */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  color: white;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  background: linear-gradient(135deg, #db2777, #6d28d9);
+  transform: translateY(-2px);
+}
+
+/* Slow bounce for icon */
+.animate-bounce-slow {
+  animation: bounce 3s infinite;
+}
+
+/* 🌈 Common Animated Gradient Background */
+.gradient-bg {
+  position: relative;
+  background: linear-gradient(135deg, #5b21b6, #7e22ce, #db2777, #be185d);
+  background-size: 300% 300%;
+  animation: gradientShift 18s ease infinite;
+  overflow: hidden;
+}
+
+/* Smooth gradient motion */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌸 Floating Bubble Background Elements */
+.gradient-bg::before,
+.gradient-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.25;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent 70%);
+  z-index: 0;
+  animation: floatBubbles 18s ease-in-out infinite;
+}
+
+.gradient-bg::before {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.gradient-bg::after {
+  width: 400px;
+  height: 400px;
+  bottom: -10%;
+  right: 10%;
+  animation-delay: 6s;
+}
+
+/* Floating Small Bubbles */
+.gradient-bg .bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%);
+  animation: floatSmall 14s ease-in-out infinite;
+  z-index: 1;
+  opacity: 0.2;
+}
+
+.gradient-bg .bubble:nth-child(1) { width: 80px; height: 80px; top: 25%; left: 15%; animation-delay: 3s; }
+.gradient-bg .bubble:nth-child(2) { width: 90px; height: 90px; bottom: 20%; left: 30%; animation-delay: 5s; }
+.gradient-bg .bubble:nth-child(3) { width: 100px; height: 100px; top: 20%; right: 25%; animation-delay: 7s; }
+.gradient-bg .bubble:nth-child(4) { width: 70px; height: 70px; bottom: 15%; right: 8%; animation-delay: 9s; }
+
+@keyframes floatBubbles {
+  0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-30px) scale(1.1); opacity: 0.9; }
+}
+
+@keyframes floatSmall {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
+
+/* Ensure Content Stays Above Bubbles */
+.section-content {
+  position: relative;
+  z-index: 5;
+}
+
+/* 🔥 Animated Gradient Background for Emergency Section */
+.emergency-bg {
+  background: linear-gradient(135deg, #fde2e4, #f8c8dc, #e3b3f0, #cdd8ff);
+  background-size: 400% 400%;
+  animation: bgMove 12s ease infinite;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+}
+
+/* ✨ Smooth background animation */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* 🌈 Animated Background for Emergency Section */
+.emergency-bg {
+  background: linear-gradient(135deg, #fce1e4, #f8c8dc, #e3b3f0, #d0d8ff);
+  background-size: 400% 400%;
+  animation: bgMove 12s ease infinite;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background animation */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🫧 Floating bubbles for subtle motion */
+.emergency-bg::before, .emergency-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: floatBubble 10s ease-in-out infinite;
+}
+.emergency-bg::before {
+  width: 100px;
+  height: 100px;
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+.emergency-bg::after {
+  width: 80px;
+  height: 80px;
+  bottom: 15%;
+  right: 25%;
+  animation-delay: 4s;
+}
+
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0px); opacity: 0.5; }
+  50% { transform: translateY(-20px); opacity: 0.9; }
+}
+
+/* ✨ Slight Floating / Jump Animation for Boxes */
+.emergency-card {
+  animation: gentleJump 5s ease-in-out infinite;
+}
+
+@keyframes gentleJump {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
