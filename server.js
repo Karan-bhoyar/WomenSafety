@@ -80,11 +80,11 @@ const SOS = mongoose.model("SOS", SOSSchema);
 // TWILIO CONFIGURATION
 // -------------------------
 const client = twilio(
-  "ACdcc4e29be67cdd74cd11c0dcc0802415", // 👉 Your Twilio SID
-  "bcdc5abddf0b26eeb12336ecca6c24f8"    // 👉 Your Twilio Auth Token
+  "ACdcc4e29be67cdd74cd11c######", // 👉 Your Twilio SID
+  "bcdc5abddf0b26eeb12336#######"    // 👉 Your Twilio Auth Token
 );
 
-const TWILIO_NUMBER = "+17277613924"; // 👉 Your Twilio Phone Number
+const TWILIO_NUMBER = "+17277#####4"; // 👉 Your Twilio Phone Number
 
 // -------------------------
 // ROUTES
@@ -245,3 +245,4 @@ app.get("/admin/logout", (req, res) => {
 app.listen(PORT, () =>
   console.log(`🚀 Server running at http://localhost:${PORT}`)
 );
+
