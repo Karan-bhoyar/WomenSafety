@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #4c62ff, #8a2be2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+    }
+
+    .login-box {
+      background: #ffffffcc;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      text-align: center;
+      backdrop-filter: blur(6px);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .input-box {
+      margin: 15px 0;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      background: #f2f2f2;
+      font-size: 15px;
+      outline: none;
+      transition: .3s;
+    }
+
+    .input-box input:focus {
+      background: #fff;
+      box-shadow: 0 0 6px #8a2be2;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: #6a0dad;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .login-btn:hover {
+      background: #4c0cab;
+      transform: scale(1.03);
+    }
+
+    .err {
+      margin-top: 12px;
+      color: red;
+      font-weight: 500;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+  <div class="login-box">
+    <h2>🔐 Admin Login</h2>
+
+    <div class="input-box">
+      <input id="username" placeholder="Enter Username">
+    </div>
+
+    <div class="input-box">
+      <input id="password" type="password" placeholder="Enter Password">
+    </div>
+
+    <button onclick="adminLogin()" class="login-btn">Login</button>
+
+    <p id="msg" class="err"></p>
+  </div>
+</div>
+
+<script>
+  function adminLogin() {
+    let u = username.value;
+    let p = password.value;
+
+    if (u === "admin" && p === "1234") {
+      window.location.href = "/admin/dashboard";
+    } else {
+      msg.innerHTML = "❌ Invalid Username or Password!";
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      background: #f3f4f8;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ====================== SIDEBAR ====================== */
+    .sidebar {
+      width: 250px;
+      background: #111827;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 4px 0 15px rgba(0, 0, 0, .2);
+    }
+
+    .sidebar h1 {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .menu a {
+      padding: 12px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: block;
+      color: white;
+      margin-bottom: 8px;
+      background: #1f2937;
+      transition: .3s;
+      font-size: 15px;
+    }
+
+    .menu a:hover {
+      background: #4f46e5;
+      transform: translateX(5px);
+    }
+
+    /* ====================== MAIN AREA ====================== */
+    .main {
+      width: 100%;
+      overflow-y: scroll;
+      padding: 30px;
+    }
+
+    h2.section-title {
+      margin-top: 25px;
+      margin-bottom: 10px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* ====================== CARD WRAPPER ====================== */
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      animation: fadeIn .6s ease-in-out;
+    }
+
+    /* ====================== TABLE ====================== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background: #4f46e5;
+      color: white;
+      font-weight: 500;
+    }
+
+    table tr:nth-child(even) {
+      background: #f4f4f4;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ====================== SIDEBAR ====================== -->
+  <div class="sidebar">
+    <h1>⚡ Admin Panel</h1>
+
+    <div class="menu">
+      <a href="#">📌 Overview</a>
+      <a href="#users">👥 Users</a>
+      <a href="#contacts">💬 Contacts</a>
+      <a href="#reports">🚨 Emergency Reports</a>
+      <a href="#locations">📍 Live Locations</a>
+      <a href="#sos">📞 SOS Contacts</a>
+      <a href="../admin/admin-logout.html" style="background:#ef4444;">🚪 Logout</a>
+    </div>
+  </div>
+
+  <!-- ====================== MAIN CONTENT ====================== -->
+  <div class="main">
+
+    <h1 style="font-size:30px; margin-bottom:10px;">🔥 Admin Dashboard</h1>
+    <p style="color:#555; margin-bottom:20px;">Manage users, messages, SOS alerts, and live locations.</p>
+
+    <!-- Users -->
+    <div id="users" class="card">
+      <h2 class="section-title">👥 Users</h2>
+      <table id="usersTable"></table>
+    </div>
+
+    <!-- Contact Messages -->
+    <div id="contacts" class="card">
+      <h2 class="section-title">💬 Contact Messages</h2>
+      <table id="contactsTable"></table>
+    </div>
+
+    <!-- Emergency Reports -->
+    <div id="reports" class="card">
+      <h2 class="section-title">🚨 Emergency Reports</h2>
+      <table id="reportsTable"></table>
+    </div>
+
+    <!-- Live Locations -->
+    <div id="locations" class="card">
+      <h2 class="section-title">📍 Live Locations (Latest First)</h2>
+      <table id="locationsTable"></table>
+    </div>
+
+    <!-- SOS Contacts -->
+    <div id="sos" class="card">
+      <h2 class="section-title">📞 SOS Contacts</h2>
+      <table id="sosTable"></table>
+    </div>
+
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

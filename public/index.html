@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Women Safety - Empowering women with instant emergency alerts, live location sharing, and community support for safer journeys.">
+  <title>Women Safety - Safer Steps, Stronger Communities</title><!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script><!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css"><!-- Favicon -->
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+/>
+  <!-- Element SDK -->
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="font-sans antialiased">
+  
+  <!-- REPLACE: Header navigation links with your project's navigation structure -->
+  <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300">
+   <nav class="w-full px-3 py-4 flex items-center justify-between">
+<!-- Logo -->
+    <div class="flex items-center space-x-3 ml-2 hover:scale-105 transition-transform duration-300">
+  <svg class="w-12 h-12 drop-shadow-lg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="18" fill="#FF6B9D" opacity="0.25" />
+    <path d="M20 8C15.6 8 12 11.6 12 16C12 21.5 20 32 20 32C20 32 28 21.5 28 16C28 11.6 24.4 8 20 8ZM20 19C18.3 19 17 17.7 17 16C17 14.3 18.3 13 20 13C21.7 13 23 14.3 23 16C23 17.7 21.7 19 20 19Z" fill="#FF6B9D" />
+  </svg>
+  <span class="text-4xl font-extrabold text-white tracking-tight drop-shadow-md">
+    SafeSteps
+  </span>
+</div>
+
+    
+    <!-- Desktop Navigation -->
+    <ul class="hidden md:flex items-center space-x-8">
+     <li><a href="#home" class="nav-link text-white hover:text-pink-300 transition-colors">Home</a></li>
+     <li><a href="#features" class="nav-link text-white hover:text-pink-300 transition-colors">Features</a></li>
+     <li><a href="#how-it-works" class="nav-link text-white hover:text-pink-300 transition-colors">How It Works</a></li>
+     <li><a href="#resources" class="nav-link text-white hover:text-pink-300 transition-colors">Resources</a></li>
+     <li><a href="#contact-form" class="nav-link text-white hover:text-pink-300 transition-colors">Contact</a></li>
+    </ul><!-- Auth Buttons -->
+
+
+
+    <div class="hidden md:flex items-center space-x-4 ml-8"><button id="login-btn" class="text-white hover:text-pink-300 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-pink-400 rounded px-3 py-1"> Login </button> <button id="signup-btn" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300"> Sign Up </button>
+    </div>
+    
+    <!-- Profile Menu (hidden until login) -->
+<div id="profile-menu" class="hidden relative ml-4">
+  <button id="profileButton"
+    class="flex items-center space-x-2 bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
+    <i class="fa fa-user-circle text-lg"></i>
+    <span id="profile-name"></span>
+  </button>
+
+  <!-- Dropdown -->
+  <div id="dropdown-menu"
+    class="hidden absolute right-0 mt-2 bg-white text-gray-700 rounded-lg shadow-lg w-40">
+    <a href="#" class="block px-4 py-2 hover:bg-gray-100">My Profile</a>
+    <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600">
+      Logout
+    </button>
+  </div>
+</div>
+    
+    <!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-pink-400 rounded p-2" aria-label="Toggle mobile menu">
+     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+     </svg></button>
+   </nav>
+   
+   <!-- Mobile Menu -->
+   <div id="mobile-menu" class="hidden md:hidden bg-indigo-900 bg-opacity-95">
+    <ul class="px-4 py-6 space-y-4">
+     <li><a href="#home" class="block text-white hover:text-pink-300 transition-colors py-2">Home</a></li>
+     <li><a href="#features" class="block text-white hover:text-pink-300 transition-colors py-2">Features</a></li>
+     <li><a href="#how-it-works" class="block text-white hover:text-pink-300 transition-colors py-2">How It Works</a></li>
+     <li><a href="#resources" class="block text-white hover:text-pink-300 transition-colors py-2">Resources</a></li>
+     <li><a href="#contact-form" class="block text-white hover:text-pink-300 transition-colors py-2">Contact</a></li>
+    </ul>
+    <div class="px-4 py-4 border-t border-indigo-700 space-y-3"><button id="mobile-login-btn" class="block w-full text-left text-white hover:text-pink-300 transition-colors py-2 font-medium"> Login </button> <button id="mobile-signup-btn" class="block w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2 rounded-lg shadow-lg transition-all text-center"> Sign Up </button>
+    </div>
+   </div>
+  </header>
+  <main>
+    
+    <!-- REPLACE: Hero section content with your project's mission statement and key messaging -->
+   <section id="home" class="hero-section relative min-h-full flex items-center justify-center text-white" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 800%22><defs><linearGradient id=%22bg%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 style=%22stop-color:%23667eea%22/><stop offset=%2250%25%22 style=%22stop-color:%23764ba2%22/><stop offset=%22100%25%22 style=%22stop-color:%23f093fb%22/></linearGradient></defs><rect width=%221200%22 height=%22800%22 fill=%22url(%23bg)%22/><g opacity=%220.1%22><circle cx=%22200%22 cy=%22150%22 r=%2280%22 fill=%22white%22/><circle cx=%22800%22 cy=%22200%22 r=%22120%22 fill=%22white%22/><circle cx=%22400%22 cy=%22600%22 r=%22100%22 fill=%22white%22/><circle cx=%221000%22 cy=%22500%22 r=%2290%22 fill=%22white%22/></g></svg>'); background-size: cover; background-position: center;">
+    <div class="hero-overlay"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
+     <div class="grid lg:grid-cols-2 gap-12 items-center"><!-- Hero Content -->
+      <div class="text-center lg:text-left relative"><!-- Floating decorative elements -->
+       <div class="absolute -top-10 -left-10 w-20 h-20 bg-pink-400 bg-opacity-20 rounded-full animate-pulse hidden lg:block"></div>
+       <div class="absolute top-20 -right-5 w-16 h-16 bg-purple-400 bg-opacity-20 rounded-full animate-bounce hidden lg:block"></div>
+       <div class="absolute -bottom-5 left-1/4 w-12 h-12 bg-yellow-400 bg-opacity-20 rounded-full animate-pulse hidden lg:block"></div>
+       <h1 id="hero-headline" class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Safer Steps, Stronger Communities</h1>
+       <p id="hero-subheadline" class="text-lg sm:text-xl mb-8 text-gray-200 leading-relaxed">Empowering women with instant emergency alerts, live location sharing, and community support for safer journeys every day.</p><!-- CTAs -->
+       <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"><button id="report-emergency-btn" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300" aria-label="Report emergency"> 🚨 Report Emergency </button> <a href="#features" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white font-semibold px-8 py-4 rounded-lg backdrop-blur-sm transition-all border-2 border-white border-opacity-30 text-center focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50"> Learn More </a>
+       </div>
+      </div>
+      
+      <!-- App Preview Card -->
+      <div class="flex justify-center lg:justify-end">
+       <div class="phone-mockup bg-white rounded-3xl shadow-2xl p-4 max-w-xs w-full">
+        <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-2xl p-6 text-white">
+         <div class="text-center mb-6">
+          <h3 class="text-lg font-semibold mb-2">Quick Actions</h3>
+          <p class="text-sm text-indigo-200">Tap for instant help</p>
+         </div>
+         
+         <!-- SOS Button --> <button class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-6 rounded-xl mb-4 shadow-lg transform transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300" aria-label="SOS emergency button"> <span class="text-3xl">🆘</span>
+          <div class="text-xl mt-2">
+           SOS
+          </div></button> 
+          
+          <!-- Quick Actions Grid -->
+         <div class="grid grid-cols-2 gap-3"><button class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400" aria-label="Share location"> <span class="text-2xl">📍</span>
+           <div class="text-xs mt-1">
+            Share Location
+           </div></button> 
+
+           <button id="call-help-btn" class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400" aria-label="Call emergency">
+  <span class="text-2xl">📞</span>
+  <div class="text-xs mt-1">Call Help</div>
+</button>
+
+           
+<!-- ALERT CONTACTS BUTTON -->
+<button id="alertContactsBtn"
+class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400">
+    <span class="text-2xl">👥</span>
+    <div class="text-xs mt-1">Alert Contacts</div>
+</button>
+
+
+
+
+<!-- SAFETY RESOURCES BUTTON -->
+<button id="safetyResourcesBtn"
+    class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400 flex flex-col items-center">
+    <span class="text-2xl">🛡️</span>
+    <div class="text-xs mt-1 font-semibold">Safety Resources</div>
+</button>
+
+<!-- Safety Popup -->
+<div id="safety-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div class="bg-white p-5 rounded-lg w-80 shadow-lg relative">
+        <h2 class="text-lg font-bold mb-3 text-indigo-700 flex items-center">🛡️ Safety Resources</h2>
+
+        <!-- Verified Helpline Numbers -->
+        <div class="mb-4">
+            <h3 class="font-semibold text-indigo-600">📞 Verified Helpline Numbers</h3>
+            <ul class="text-gray-700 text-sm list-disc ml-5 space-y-1">
+                <li>Women Helpline: 1091</li>
+                <li>Emergency: 112</li>
+                <li>Domestic Abuse Helpline: 181</li>
+            </ul>
+        </div>
+
+        <!-- Self-defense Guidance -->
+        <div class="mb-4">
+            <h3 class="font-semibold text-indigo-600">🥋 Self-defense Guidance</h3>
+            <ul class="text-gray-700 text-sm list-disc ml-5 space-y-1">
+                <li>Stay aware of surroundings</li>
+                <li>Use strong body posture</li>
+                <li>Learn simple blocking and escape moves</li>
+            </ul>
+        </div>
+
+        <!-- Awareness Materials -->
+        <div>
+            <h3 class="font-semibold text-indigo-600">📚 Awareness & Laws</h3>
+            <ul class="text-gray-700 text-sm list-disc ml-5 space-y-1">
+                <li>Your rights under IPC Section 354</li>
+                <li>Free legal aid availability</li>
+                <li>How to file an FIR safely</li>
+            </ul>
+        </div>
+
+        <button id="close-safety-btn"
+            class="mt-4 w-full bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 rounded-lg transition-all">
+            Close
+        </button>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const safetyBtn = document.getElementById("safetyResourcesBtn");
+    const popup = document.getElementById("safety-popup");
+    const closeBtn = document.getElementById("close-safety-btn");
+
+    safetyBtn.onclick = () => {
+        popup.classList.remove("hidden");
+    };
+
+    closeBtn.onclick = () => {
+        popup.classList.add("hidden");
+    };
+});
+</script>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- REPLACE: Features section with your project's specific features and capabilities -->
+<section id="features" class="relative py-20 overflow-hidden bg-gradient-to-br from-pink-100 via-amber-50 to-indigo-100 animate-gradient-shift">
+  <!-- Floating decorative bubbles -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-pink-300 rounded-full opacity-25 animate-float"></div>
+    <div class="absolute bottom-20 right-16 w-40 h-40 bg-indigo-300 rounded-full opacity-20 animate-float-slow"></div>
+    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-teal-300 rounded-full opacity-15 animate-float-slower"></div>
+  </div>
+
+  <div class="relative container mx-auto px-6 lg:px-12 z-10">
+    <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-4">
+      Powerful Features for Your Safety
+    </h2>
+    <p class="text-center text-gray-700 mb-12 max-w-2xl mx-auto">
+      Experience cutting-edge features designed to keep you connected, safe, and supported — wherever you go.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Feature 1 -->
+      <div class="bg-gradient-to-br from-rose-200 to-pink-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-3 hover:scale-105 border border-rose-300 backdrop-blur-lg feature-card animate-float-slow">
+        <div class="text-5xl mb-4">📍</div>
+        <h3 class="text-2xl font-semibold mb-2 text-gray-900">Live Location Sharing</h3>
+        <p class="text-gray-700">Instantly share your real-time location with trusted contacts during emergencies.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="bg-gradient-to-br from-purple-200 to-violet-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-3 hover:scale-105 border border-purple-300 backdrop-blur-lg feature-card animate-float">
+        <div class="text-5xl mb-4">🚨</div>
+        <h3 class="text-2xl font-semibold mb-2 text-gray-900">One-Tap SOS</h3>
+        <p class="text-gray-700">Send immediate alerts with location details to emergency contacts and nearby users.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="bg-gradient-to-br from-cyan-200 to-emerald-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-3 hover:scale-105 border border-teal-300 backdrop-blur-lg feature-card animate-float-slower">
+        <div class="text-5xl mb-4">💬</div>
+        <h3 class="text-2xl font-semibold mb-2 text-gray-900">Community Support</h3>
+        <p class="text-gray-700">Connect with a network of women who share experiences, provide help, and safety tips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+   
+   <!-- REPLACE: How It Works section with your project's onboarding flow -->
+   <section id="how-it-works" class="relative py-20 overflow-hidden bg-gradient-to-r from-pink-100 via-rose-200 to-yellow-100 animate-gradient-move">
+  <!-- Animated floating shapes -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-10 left-10 w-32 h-32 bg-pink-300 opacity-30 rounded-full blur-3xl animate-float-slow"></div>
+    <div class="absolute bottom-20 right-20 w-40 h-40 bg-purple-300 opacity-25 rounded-full blur-2xl animate-float"></div>
+    <div class="absolute top-1/2 left-1/3 w-24 h-24 bg-yellow-200 opacity-20 rounded-full blur-xl animate-float-slower"></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto px-6 text-center">
+    <h2 class="text-4xl font-extrabold text-gray-900 mb-4 drop-shadow-md">How It Works</h2>
+    <p class="text-lg text-gray-700 mb-12">Get started in three simple steps and stay protected wherever you go</p>
+
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+      <!-- Step 1 -->
+      <div class="bg-white bg-opacity-80 backdrop-blur-md p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2 hover:scale-105 border-t-4 border-pink-400 feature-card">
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 flex items-center justify-center bg-pink-500 text-white text-2xl font-bold rounded-full shadow-lg mb-4 animate-bounce">1</div>
+          <div class="text-4xl mb-2">📱</div>
+          <h3 class="font-semibold text-xl mb-2">Install & Register</h3>
+          <p class="text-gray-600">Download the app and create your account in under 2 minutes with basic information.</p>
+        </div>
+      </div>
+
+    
+      <!-- Step 2 -->
+<div class="bg-white bg-opacity-80 backdrop-blur-md p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2 hover:scale-105 border-t-4 border-indigo-400 feature-card">
+  <div class="flex flex-col items-center">
+    <div class="w-14 h-14 flex items-center justify-center bg-indigo-500 text-white text-2xl font-bold rounded-full shadow-lg mb-4 animate-float-slow">2</div>
+    <div class="text-4xl mb-2">⚙️</div>
+    <h3 class="font-semibold text-xl mb-2">Set Contacts & Preferences</h3>
+    <p class="text-gray-600">Add trusted contacts and customize your safety settings to match your needs.</p>
+  </div>
+</div>
+
+
+      <!-- Step 3 -->
+      <div class="bg-white bg-opacity-80 backdrop-blur-md p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2 hover:scale-105 border-t-4 border-purple-400 feature-card">
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 flex items-center justify-center bg-purple-500 text-white text-2xl font-bold rounded-full shadow-lg mb-4 animate-bounce">3</div>
+          <div class="text-4xl mb-2">🚨</div>
+          <h3 class="font-semibold text-xl mb-2">Tap SOS & Stay Safe</h3>
+          <p class="text-gray-600">In an emergency, tap the SOS button to instantly alert your contacts and share your location.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPLACE: Emergency Resources section with your local emergency numbers and resources -->
+  <section id="resources" class="py-20 bg-gradient-to-bl from-rose-100 via-pink-50 to-fuchsia-100 relative overflow-hidden">
+  <!-- Soft clean gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-pink-50 to-purple-50"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Emergency Resources</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Quick access to emergency contacts and helpful resources</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <!-- Emergency Numbers -->
+      <div class="bg-white rounded-xl p-8 shadow-lg">
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center">
+          <span class="text-3xl mr-3">📞</span> Emergency Contacts
+        </h3>
+        <ul class="space-y-4">
+          <li class="flex items-center justify-between p-4 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
+            <div>
+              <div class="font-semibold text-gray-900">Emergency Services</div>
+              <div class="text-sm text-gray-600">Police, Fire, Ambulance</div>
+            </div>
+            <a href="tel:112" class="text-2xl font-bold text-red-600 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 rounded px-3 py-1">112</a>
+          </li>
+
+          <li class="flex items-center justify-between p-4 bg-pink-50 rounded-lg hover:bg-pink-100 transition-colors">
+            <div>
+              <div class="font-semibold text-gray-900">Women's Helpline</div>
+              <div class="text-sm text-gray-600">24/7 Support &amp; Counseling</div>
+            </div>
+            <a href="tel:1091" class="text-lg font-bold text-pink-600 hover:text-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-400 rounded px-3 py-1">1091</a>
+          </li>
+
+          <li class="flex items-center justify-between p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+            <div>
+              <div class="font-semibold text-gray-900">Domestic Violence Helpline</div>
+              <div class="text-sm text-gray-600">National Support Line</div>
+            </div>
+            <a href="tel:181" class="text-lg font-bold text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded px-3 py-1">181</a>
+          </li>
+
+          <li class="flex items-center justify-between p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+            <div>
+              <div class="font-semibold text-gray-900">Child Helpline</div>
+              <div class="text-sm text-gray-600">For reporting child abuse or trafficking</div>
+            </div>
+            <a href="tel:1098" class="text-lg font-bold text-purple-600 hover:text-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-400 rounded px-3 py-1">1098</a>
+          </li>
+        </ul>
+      </div>
+
+     <!-- Map & Resources -->
+<div class="space-y-6">
+
+<!-- Map Box -->
+<div class="bg-white rounded-xl p-8 shadow-lg relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-100 to-transparent rounded-bl-full opacity-50"></div>
+
+  <h3 class="text-2xl font-semibold text-gray-900 mb-4 flex items-center relative z-10">
+    <span class="text-3xl mr-3">🗺️</span> Safe Zones Near You
+  </h3>
+
+  <!-- ⭐ LIVE GOOGLE MAP -->
+  <div class="rounded-lg h-64 relative overflow-hidden border border-indigo-200 shadow-inner">
+    <div id="map" class="w-full h-full"></div>
+  </div>
+</div>
+
+
+        <!-- Download Resources -->
+        <div class="bg-white rounded-xl p-8 shadow-lg">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+            <span class="text-2xl mr-3">📄</span> Downloadable Resources
+          </h3>
+          <button
+            class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-lg shadow-lg transition-all transform hover:scale-105 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-pink-300">
+            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            Download Emergency Guide PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Testimonials -->
+   <!-- Contact Us Section -->
+   <section id="contact-form" class="py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 relative overflow-hidden"><!-- Beautiful background pattern -->
+    <div class="absolute inset-0 opacity-5">
+     <svg class="w-full h-full" viewbox="0 0 600 600" xmlns="http://www.w3.org/2000/svg"><defs>
+       <pattern id="contact-pattern" x="0" y="0" width="60" height="60" patternunits="userSpaceOnUse">
+        <path d="M30 10 L50 30 L30 50 L10 30 Z" fill="#059669" opacity="0.3" />
+        <circle cx="30" cy="30" r="3" fill="#0891b2" />
+        <path d="M15 15 L45 15 L45 45 L15 45 Z" fill="none" stroke="#06b6d4" stroke-width="0.5" />
+       </pattern>
+      </defs> <rect width="100%" height="100%" fill="url(#contact-pattern)" />
+     </svg>
+    </div>
+    
+    <!-- Floating decorative elements -->
+    <div class="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-emerald-200 to-teal-200 rounded-full opacity-20 animate-pulse"></div>
+    <div class="absolute top-20 right-20 w-24 h-24 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full opacity-25 animate-bounce"></div>
+    <div class="absolute bottom-20 left-1/4 w-20 h-20 bg-gradient-to-br from-teal-200 to-emerald-200 rounded-full opacity-20 animate-pulse"></div>
+    <div class="absolute bottom-10 right-1/3 w-28 h-28 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-full opacity-15 animate-bounce"></div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+     <div class="text-center mb-16">
+      <h2 id="contact-title" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get In Touch With Us</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Have questions, suggestions, or need support? We're here to help make your journey safer.</p>
+     </div>
+     <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto"><!-- Contact Information -->
+      <div class="space-y-8">
+       <div class="bg-gradient-to-br from-white to-emerald-50 rounded-2xl p-8 shadow-lg border border-emerald-200 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-emerald-100 to-transparent rounded-bl-full opacity-50"></div>
+        <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center relative z-10"><span class="text-3xl mr-3">📞</span> Contact Information</h3>
+        <div class="space-y-6 relative z-10">
+         <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center shadow-lg">
+           <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /> <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-semibold text-gray-900">Email Us</h4>
+           <p class="text-gray-600">support@safesteps.com</p>
+           <p class="text-sm text-gray-500">We'll respond within 24 hours</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
+           <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-semibold text-gray-900">Call Us</h4>
+           <p class="text-gray-600">+1 (555) 123-SAFE</p>
+           <p class="text-sm text-gray-500">24/7 Emergency Support</p>
+          </div>
+         </div>
+         <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center shadow-lg">
+           <svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+           </svg>
+          </div>
+          <div>
+           <h4 class="font-semibold text-gray-900">Visit Us</h4>
+           <p class="text-gray-600">123 Safety Street, Secure City, SC 12345</p>
+           <p class="text-sm text-gray-500">Mon-Fri: 9AM-6PM</p>
+          </div>
+         </div>
+        </div>
+       </div>
+       
+       <!-- Quick Stats -->
+       <div class="bg-gradient-to-br from-white to-teal-50 rounded-2xl p-8 shadow-lg border border-teal-200 relative overflow-hidden">
+        <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-tl from-teal-100 to-transparent rounded-tl-full opacity-40"></div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-6 relative z-10">Why Choose SafeSteps?</h3>
+        <div class="grid grid-cols-2 gap-4 relative z-10">
+         <div class="text-center">
+          <div class="text-2xl font-bold text-emerald-600">
+           50K+
+          </div>
+          <div class="text-sm text-gray-600">
+           Active Users
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-2xl font-bold text-teal-600">
+           99.9%
+          </div>
+          <div class="text-sm text-gray-600">
+           Uptime
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-2xl font-bold text-cyan-600">
+           24/7
+          </div>
+          <div class="text-sm text-gray-600">
+           Support
+          </div>
+         </div>
+         <div class="text-center">
+          <div class="text-2xl font-bold text-blue-600">
+           5★
+          </div>
+          <div class="text-sm text-gray-600">
+           Rating
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      
+      <!-- Contact Form -->
+      <div class="bg-gradient-to-br from-white to-cyan-50 rounded-2xl p-8 shadow-lg border border-cyan-200 relative overflow-hidden">
+       <div class="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-cyan-100 to-transparent rounded-br-full opacity-30"></div>
+       <div class="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-blue-100 to-transparent rounded-tl-full opacity-25"></div>
+       <h3 class="text-2xl font-semibold text-gray-900 mb-6 flex items-center relative z-10"><span class="text-3xl mr-3">💬</span> Send Us a Message</h3>
+       <form id="contact-form" class="space-y-6 relative z-10">
+        <div class="grid md:grid-cols-2 gap-4">
+         <div><label for="contact-first-name" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label> <input type="text" id="contact-first-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="Your first name">
+         </div>
+         <div><label for="contact-last-name" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label> <input type="text" id="contact-last-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="Your last name">
+         </div>
+        </div>
+        <div><label for="contact-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label> <input type="email" id="contact-email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="your.email@example.com">
+        </div>
+        <div><label for="contact-phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label> <input type="tel" id="contact-phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="+1 (555) 123-4567">
+        </div>
+        <div><label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label> <select id="contact-subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors bg-white shadow-sm"> <option value="">Select a subject</option> <option value="general">General Inquiry</option> <option value="support">Technical Support</option> <option value="feature">Feature Request</option> <option value="partnership">Partnership</option> <option value="feedback">Feedback</option> <option value="other">Other</option> </select>
+        </div>
+        <div><label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label> <textarea id="contact-message" required rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors bg-white shadow-sm resize-none" placeholder="Tell us how we can help you..."></textarea>
+        </div>
+        <div class="flex items-start space-x-3"><input type="checkbox" id="contact-newsletter" class="mt-1 w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"> <label for="contact-newsletter" class="text-sm text-gray-600"> I'd like to receive safety tips and updates via email </label>
+        </div><button type="submit" id="contact-submit-btn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold py-4 px-6 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300 flex items-center justify-center">
+         <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+         </svg> Send Message </button>
+       </form>
+      </div>
+     </div>
+    </div>
+   </section>
+  </main>
+  
+  <!-- REPLACE: Footer content with your project's links and social media -->
+  <footer id="contact" class="bg-gradient-to-br from-indigo-900 to-indigo-800 text-white py-12">
+   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-8"><!-- About -->
+     <div>
+      <h4 class="text-lg font-semibold mb-4">About SafeSteps</h4>
+      <p class="text-indigo-200 text-sm">Empowering women with technology to create safer communities and confident journeys.</p>
+     </div><!-- Quick Links -->
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+      <ul class="space-y-2 text-sm">
+       <li><a href="#features" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">Features</a></li>
+       <li><a href="#how-it-works" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">How It Works</a></li>
+       <li><a href="#resources" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">Resources</a></li>
+       <li><a href="#" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">Privacy Policy</a></li>
+      </ul>
+     </div>
+     
+     <!-- Support -->
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Support</h4>
+      <ul class="space-y-2 text-sm">
+       <li><a href="#" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">Help Center</a></li>
+       <li><a href="#" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">Contact Us</a></li>
+       <li><a href="#" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">Report Issue</a></li>
+       <li><a href="#" class="text-indigo-200 hover:text-white transition-colors focus:outline-none focus:underline">Accessibility</a></li>
+      </ul>
+     </div>
+     
+     <!-- Social -->
+     <div>
+      <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+<div class="flex space-x-4">
+  <a
+    href="https://facebook.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="w-10 h-10 bg-indigo-700 hover:bg-indigo-600 rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400"
+    aria-label="Facebook"
+  >
+    <i class="fab fa-facebook-f text-white text-lg"></i>
+  </a>
+
+  <a
+    href="https://twitter.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="w-10 h-10 bg-indigo-700 hover:bg-indigo-600 rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400"
+    aria-label="Twitter"
+  >
+    <i class="fab fa-twitter text-white text-lg"></i>
+  </a>
+
+  <a
+    href="https://instagram.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="w-10 h-10 bg-indigo-700 hover:bg-indigo-600 rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400"
+    aria-label="Instagram"
+  >
+    <i class="fab fa-instagram text-white text-lg"></i>
+  </a>
+</div>
+
+      </div>
+     </div>
+    </div>
+    <div class="border-t border-indigo-700 pt-8 text-center">
+     <p id="footer-copyright" class="text-indigo-200 text-sm">© 2025 SafeSteps. All rights reserved. Made with ❤️ for women's safety.</p>
+    </div>
+   </div>
+  </footer>
+  
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal-overlay hidden">
+   <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4" role="dialog" aria-labelledby="login-modal-title" aria-modal="true">
+    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-6 rounded-t-2xl">
+     <div class="flex items-center justify-between">
+      <h3 id="login-modal-title" class="text-2xl font-bold flex items-center"><span class="text-3xl mr-3">🔐</span> Welcome Back</h3><button id="close-login-modal" class="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded p-1" aria-label="Close login modal">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+     </div>
+    </div>
+    <form id="login-form" class="p-6 space-y-4">
+     <div><label for="login-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label> <input type="email" id="login-email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="your.email@example.com">
+     </div>
+     <div><label for="login-password" class="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+      <div class="relative"><input type="password" id="login-password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors bg-white shadow-sm pr-12" placeholder="Enter your password"> <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Toggle password visibility">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg></button>
+      </div>
+     </div>
+     <div class="flex items-center justify-between">
+      <div class="flex items-center"><input type="checkbox" id="remember-me" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"> <label for="remember-me" class="ml-2 text-sm text-gray-600">Remember me</label>
+      </div><button type="button" class="text-sm text-indigo-600 hover:text-indigo-700 focus:outline-none focus:underline"> Forgot password? </button>
+     </div><button type="submit" id="login-submit-btn" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-300"> Sign In </button>
+     <div class="text-center">
+      <p class="text-sm text-gray-600">Don't have an account? <button type="button" id="switch-to-signup" class="text-indigo-600 hover:text-indigo-700 font-medium focus:outline-none focus:underline"> Sign up here </button></p>
+     </div>
+    </form>
+   </div>
+  </div>
+  
+  <!-- Signup Modal -->
+  <div id="signup-modal" class="modal-overlay hidden">
+   <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 max-h-full overflow-y-auto" role="dialog" aria-labelledby="signup-modal-title" aria-modal="true">
+    <div class="bg-gradient-to-r from-pink-500 to-rose-500 text-white p-6 rounded-t-2xl">
+     <div class="flex items-center justify-between">
+      <h3 id="signup-modal-title" class="text-2xl font-bold flex items-center"><span class="text-3xl mr-3">🌟</span> Join SafeSteps</h3><button id="close-signup-modal" class="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded p-1" aria-label="Close signup modal">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+     </div>
+    </div>
+    <form id="signup-form" class="p-6 space-y-4">
+     <div class="grid grid-cols-2 gap-4">
+      <div><label for="signup-first-name" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label> <input type="text" id="signup-first-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="First name">
+      </div>
+      <div><label for="signup-last-name" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label> <input type="text" id="signup-last-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="Last name">
+      </div>
+     </div>
+     <div><label for="signup-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label> <input type="email" id="signup-email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="your.email@example.com">
+     </div>
+     <div><label for="signup-phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label> <input type="tel" id="signup-phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="+1 (555) 123-4567">
+     </div>
+     <div><label for="signup-password" class="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+      <div class="relative"><input type="password" id="signup-password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm pr-12" placeholder="Create a strong password"> <button type="button" id="toggle-signup-password" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none" aria-label="Toggle password visibility">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg></button>
+      </div>
+      <div class="mt-2">
+       <div class="text-xs text-gray-500">
+        Password strength:
+       </div>
+       <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+        <div id="password-strength-bar" class="bg-red-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+       </div>
+       <div id="password-strength-text" class="text-xs text-gray-500 mt-1">
+        Enter a password
+       </div>
+      </div>
+     </div>
+     <div><label for="signup-confirm-password" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label> <input type="password" id="signup-confirm-password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="Confirm your password">
+      <div id="password-match-message" class="text-xs mt-1 hidden"></div>
+     </div>
+     <div><label for="signup-emergency-contact" class="block text-sm font-medium text-gray-700 mb-2">Emergency Contact Name</label> <input type="text" id="signup-emergency-contact" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="Emergency contact name">
+     </div>
+     <div><label for="signup-emergency-phone" class="block text-sm font-medium text-gray-700 mb-2">Emergency Contact Phone</label> <input type="tel" id="signup-emergency-phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors bg-white shadow-sm" placeholder="+1 (555) 987-6543">
+     </div>
+     <div class="space-y-3">
+      <div class="flex items-start space-x-3"><input type="checkbox" id="signup-terms" required class="mt-1 w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"> <label for="signup-terms" class="text-sm text-gray-600"> I agree to the <button type="button" class="text-pink-600 hover:text-pink-700 underline focus:outline-none">Terms of Service</button> and <button type="button" class="text-pink-600 hover:text-pink-700 underline focus:outline-none">Privacy Policy</button> * </label>
+      </div>
+      <div class="flex items-start space-x-3"><input type="checkbox" id="signup-notifications" class="mt-1 w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"> <label for="signup-notifications" class="text-sm text-gray-600"> I want to receive safety alerts and updates via email and SMS </label>
+      </div>
+     </div><button type="submit" id="signup-submit-btn" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300"> Create Account </button>
+     <div class="text-center">
+      <p class="text-sm text-gray-600">Already have an account? <button type="button" id="switch-to-login" class="text-pink-600 hover:text-pink-700 font-medium focus:outline-none focus:underline"> Sign in here </button></p>
+     </div>
+    </form>
+   </div>
+  </div>
+  
+  <!-- Emergency Report Modal -->
+  <div id="report-modal" class="modal-overlay hidden">
+   <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 max-h-full overflow-y-auto" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+    <div class="bg-gradient-to-r from-red-500 to-pink-500 text-white p-6 rounded-t-2xl">
+     <div class="flex items-center justify-between">
+      <h3 id="modal-title" class="text-2xl font-bold flex items-center"><span class="text-3xl mr-3">🚨</span> Emergency Report</h3><button id="close-modal-btn" class="text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-white rounded p-1" aria-label="Close modal">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+       </svg></button>
+     </div>
+    </div>
+    <form id="emergency-form" class="p-6 space-y-4">
+     <div><label for="report-name" class="block text-sm font-medium text-gray-700 mb-1">Name (Optional)</label> <input type="text" id="report-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="Your name">
+     </div>
+     <div><label for="report-location" class="block text-sm font-medium text-gray-700 mb-1">Location *</label>
+      <div class="flex gap-2"><input type="text" id="report-location" required class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="Enter or detect location"> <button type="button" id="detect-location-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500" aria-label="Detect current location"> 📍 </button>
+      </div>
+      <p id="location-status" class="text-xs text-gray-500 mt-1"></p>
+     </div>
+     <div><label for="report-description" class="block text-sm font-medium text-gray-700 mb-1">Description *</label> <textarea id="report-description" required rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent resize-none" placeholder="Describe the emergency situation"></textarea>
+     </div>
+     <div><label for="report-contact" class="block text-sm font-medium text-gray-700 mb-1">Contact Number *</label> <input type="tel" id="report-contact" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent" placeholder="Your phone number">
+     </div>
+     <div class="flex gap-3 pt-4"><button type="submit" id="send-alert-btn" class="flex-1 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-semibold py-3 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300"> Send Alert </button> <button type="button" id="cancel-btn" class="px-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-400"> Cancel </button>
+     </div>
+    </form>
+   </div>
+  </div><!-- Toast Notification -->
+  <div id="toast" class="toast hidden">
+   <div class="flex items-center"><span class="text-2xl mr-3">✅</span>
+    <div>
+     <div class="font-semibold">
+      Alert Sent Successfully!
+     </div>
+     <div id="toast-message" class="text-sm text-green-100"></div>
+    </div>
+   </div>
+  </div>
+
+
+<!-- SOS POPUP -->
+<div id="sos-popup" 
+     class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white text-black border border-gray-300 shadow-lg p-4 rounded-lg w-80 hidden z-50">
+
+  <h3 class="font-bold mb-2 text-center">Save Emergency Contact</h3>
+
+  <input type="text" id="sos-number" placeholder="Enter phone number"
+         class="w-full border border-gray-400 p-2 rounded mb-3 bg-white text-black">
+
+  <button id="save-sos-btn" class="w-full bg-indigo-700 text-white p-2 rounded mb-2">
+    Save & Send SOS
+  </button>
+
+  <button id="close-sos-btn" class="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-400">
+    Close
+  </button>
+
+  <!-- Saved contacts -->
+  <h4 class="font-bold mt-3 text-center text-sm">Saved Contacts</h4>
+  <div id="saved-contacts" class="mt-2 space-y-2 text-center text-sm"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const saveBtn = document.getElementById("save-sos-btn");
+    const closeBtn = document.getElementById("close-sos-btn");
+    const numberInput = document.getElementById("sos-number");
+    const savedContactsDiv = document.getElementById("saved-contacts");
+
+    let savedContacts = JSON.parse(localStorage.getItem("sosContacts")) || [];
+
+    function saveAndSendSOS(number) {
+        if (!savedContacts.includes(number)) {
+            savedContacts.push(number);
+            localStorage.setItem("sosContacts", JSON.stringify(savedContacts));
+        }
+        alert(`🚨 SOS sent to: ${number}`);
+        renderContacts();
+    }
+
+    // Save button
+    saveBtn.onclick = () => {
+        const num = numberInput.value.trim();
+        if (!num) return;
+        saveAndSendSOS(num);
+        numberInput.value = "";
+    };
+
+    // Close popup
+    closeBtn.onclick = () => {
+        document.getElementById("sos-popup").classList.add("hidden");
+    };
+
+    // Render saved contacts without "Send SOS" button
+    function renderContacts() {
+        savedContactsDiv.innerHTML = "";
+
+        if (savedContacts.length === 0) {
+            savedContactsDiv.innerHTML = `<div class="text-gray-400">No contacts saved</div>`;
+            return;
+        }
+
+        savedContacts.forEach(num => {
+            const div = document.createElement("div");
+            div.className = "flex justify-between items-center border border-gray-300 p-2 rounded bg-gray-100";
+
+            const span = document.createElement("span");
+            span.textContent = num;
+
+            // Edit button
+            const editBtn = document.createElement("button");
+            editBtn.textContent = "Edit";
+            editBtn.className = "ml-2 bg-yellow-600 text-white px-2 py-1 rounded text-xs hover:bg-yellow-500";
+            editBtn.onclick = () => {
+                const newNumber = prompt("Edit contact number:", num);
+                if (newNumber && newNumber.trim() !== "") {
+                    const index = savedContacts.indexOf(num);
+                    savedContacts[index] = newNumber.trim();
+                    localStorage.setItem("sosContacts", JSON.stringify(savedContacts));
+                    renderContacts();
+                }
+            };
+
+            // Remove button
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.className = "ml-2 bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-500";
+            removeBtn.onclick = () => {
+                savedContacts = savedContacts.filter(c => c !== num);
+                localStorage.setItem("sosContacts", JSON.stringify(savedContacts));
+                renderContacts();
+            };
+
+            div.appendChild(span);
+            div.appendChild(editBtn);
+            div.appendChild(removeBtn);
+
+            savedContactsDiv.appendChild(div);
+        });
+    }
+
+    // Initial render
+    renderContacts();
+});
+</script>
+
+
+
+
+
+
+  <!-- ✅ Your custom JavaScript file -->
+<script src="script.js"></script>
+<script>
+let watchId = null;
+let latestLat = null;
+let latestLng = null;
+let locNotifiedSOS = false; // track if location notification shown for SOS
+let locNotifiedBtn = false; // track if location notification shown for button
+
+// Function to start live location tracking silently
+function startLocationTracking() {
+    if (!navigator.geolocation) return alert("Geolocation not supported");
+    if (watchId !== null) return; // Already tracking
+
+    watchId = navigator.geolocation.watchPosition(
+        (pos) => {
+            latestLat = pos.coords.latitude;
+            latestLng = pos.coords.longitude;
+
+            // Send location to backend silently
+            fetch("http://localhost:5000/api/location", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userId: "USER123", // replace with actual user ID
+                    latitude: latestLat,
+                    longitude: latestLng
+                }),
+            }).catch(err => console.log("Error sending location:", err));
+        },
+        (err) => alert("Please enable location permissions."),
+        { enableHighAccuracy: true }
+    );
+}
+
+// Function to show notification
+function showNotification(text, color = "#4caf50", bottom = "20px") {
+    const notif = document.createElement("div");
+    notif.innerText = text;
+    notif.style.position = "fixed";
+    notif.style.bottom = bottom;
+    notif.style.right = "20px";
+    notif.style.backgroundColor = color;
+    notif.style.color = "white";
+    notif.style.padding = "10px 20px";
+    notif.style.borderRadius = "8px";
+    notif.style.boxShadow = "0 2px 6px rgba(0,0,0,0.3)";
+    notif.style.zIndex = 9999;
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 3000);
+}
+
+// SOS button
+document.querySelector('[aria-label="SOS emergency button"]').addEventListener("click", () => {
+    // SOS popup immediately
+    showNotification("🆘 SOS alert triggered!", "#f44336");
+
+    // Start live location tracking
+    startLocationTracking();
+
+    // Send SOS to backend immediately
+    fetch("http://localhost:5000/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            name: "USER123",
+            location: latestLat && latestLng ? `Lat: ${latestLat}, Lng: ${latestLng}` : "Location sent shortly...",
+            description: "🚨 SOS Alert! Immediate help needed.",
+            contact: "Emergency Contact Number"
+        })
+    }).then(res => res.json())
+      .then(() => {
+        // Delay ~3 seconds to show location shared notification
+        setTimeout(() => {
+            if (!locNotifiedSOS) {
+                locNotifiedSOS = true;
+                showNotification("📍 Location shared!");
+            }
+        }, 3000);
+      })
+      .catch(err => console.log("Error sending SOS:", err));
+});
+
+// Share Location button
+document.querySelector('[aria-label="Share location"]').addEventListener("click", () => {
+    // Start live location tracking
+    startLocationTracking();
+
+    // Show notification only once for button
+    if (!locNotifiedBtn) {
+        locNotifiedBtn = true;
+        showNotification("📍 Location sharing started!");
+    }
+});
+</script>
+
+<script>
+  function initMap() {
+    const mapEl = document.getElementById("map");
+
+    const map = new google.maps.Map(mapEl, {
+      zoom: 15,
+      mapTypeControl: false,
+    });
+
+    // Get user location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const userLoc = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          };
+
+          map.setCenter(userLoc);
+
+          // Blue Marker for user
+          new google.maps.Marker({
+            position: userLoc,
+            map: map,
+            icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+            title: "You are here"
+          });
+        },
+        () => alert("Location permission denied.")
+      );
+    }
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzRuv3UsXg49NTMtnYcfCbIJa3nozucxQ&libraries=places&callback=initMap" async defer></script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ================= Download Emergency PDF =================
+  const downloadBtn = document.querySelector('#resources button');
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      // Replace with your actual PDF file path
+      const link = document.createElement('a');
+      link.href = 'SafeSteps_Emergency_Guide.pdf';
+      link.download = 'SafeSteps_Emergency_Guide.pdf';
+      link.click();
+      alert('Emergency Guide PDF download started!');
+    });
+  }
+
+  // ================= Contact Form =================
+  const contactForm = document.querySelector('#contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Message sent! Thank you for contacting SafeSteps.');
+      contactForm.reset();
+    });
+  }
+
+  // ================= Login Modal =================
+  const loginModal = document.querySelector('#login-modal');
+  const signupModal = document.querySelector('#signup-modal');
+
+  // Open/Close modals
+  document.querySelectorAll('#switch-to-login').forEach(btn => {
+    btn.addEventListener('click', () => {
+      signupModal.classList.add('hidden');
+      loginModal.classList.remove('hidden');
+    });
+  });
+
+  document.querySelectorAll('#switch-to-signup').forEach(btn => {
+    btn.addEventListener('click', () => {
+      loginModal.classList.add('hidden');
+      signupModal.classList.remove('hidden');
+    });
+  });
+
+  document.querySelectorAll('#close-login-modal, #close-signup-modal').forEach(btn => {
+    btn.addEventListener('click', () => {
+      loginModal.classList.add('hidden');
+      signupModal.classList.add('hidden');
+    });
+  });
+
+  // Login form submit
+  const loginForm = document.querySelector('#login-form');
+  if (loginForm) {
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Logged in successfully!');
+      loginForm.reset();
+      loginModal.classList.add('hidden');
+    });
+  }
+
+  // Signup form submit
+  const signupForm = document.querySelector('#signup-form');
+  if (signupForm) {
+    signupForm.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Account created successfully!');
+      signupForm.reset();
+      signupModal.classList.add('hidden');
+    });
+  }
+
+  // ================= Toggle password visibility =================
+  document.querySelectorAll('#toggle-login-password, #toggle-signup-password').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = btn.previousElementSibling;
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+  });
+
+  // ================= Emergency Report Modal =================
+  const reportModal = document.querySelector('#report-modal');
+  const reportForm = document.querySelector('#emergency-form');
+
+  const openReportBtns = document.querySelectorAll('.open-report-modal');
+  const closeReportBtn = document.querySelector('#close-modal-btn');
+
+  openReportBtns.forEach(btn => {
+    btn.addEventListener('click', () => reportModal.classList.remove('hidden'));
+  });
+
+  if (closeReportBtn) {
+    closeReportBtn.addEventListener('click', () => reportModal.classList.add('hidden'));
+  }
+
+  if (reportForm) {
+    reportForm.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Emergency report submitted! Help is on the way.');
+      reportForm.reset();
+      reportModal.classList.add('hidden');
+    });
+  }
+
+});
+</script>
+
+  </body>
+  
+</html>
