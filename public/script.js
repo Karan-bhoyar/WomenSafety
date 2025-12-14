@@ -1002,3 +1002,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+
+
+
+
+
+
+
+document.getElementById("contact-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = {
+    firstName: document.getElementById("contact-first-name").value,
+    lastName: document.getElementById("contact-last-name").value,
+    email: document.getElementById("contact-email").value,
+    phone: document.getElementById("contact-phone").value,
+    subject: document.getElementById("contact-subject").value,
+    message: document.getElementById("contact-message").value,
+    newsletter: document.getElementById("contact-newsletter").checked
+  };
+
+  await fetch("http://localhost:5000/api/contacts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  alert("✅ Message Sent");
+  e.target.reset();
+});
+
+
+
+

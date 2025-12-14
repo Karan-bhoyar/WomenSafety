@@ -13,7 +13,7 @@ const PORT = 5000;
 // -------------------------
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public"))); // serve HTML/CSS/JS
+app.use(express.static(path.join(__dirname, "public")));
 
 // -------------------------
 // MONGODB CONNECTION
@@ -24,7 +24,7 @@ mongoose
   .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
 // -------------------------
-// SCHEMAS & MODELS
+// SCHEMAS
 // -------------------------
 const userSchema = new mongoose.Schema({
   firstName: String,
@@ -46,6 +46,7 @@ const contactSchema = new mongoose.Schema({
   subject: String,
   message: String,
   newsletter: Boolean,
+  createdAt: { type: Date, default: Date.now },
 });
 
 const reportSchema = new mongoose.Schema({
@@ -63,60 +64,59 @@ const locationSchema = new mongoose.Schema({
   timestamp: { type: Date, default: Date.now },
 });
 
-// SOS Schema
-const SOSSchema = new mongoose.Schema({
+const sosSchema = new mongoose.Schema({
   number: String,
   createdAt: { type: Date, default: Date.now },
 });
 
-// Models
+// -------------------------
+// MODELS
+// -------------------------
 const User = mongoose.model("User", userSchema);
 const Contact = mongoose.model("Contact", contactSchema);
 const Report = mongoose.model("Report", reportSchema);
 const Location = mongoose.model("Location", locationSchema);
-const SOS = mongoose.model("SOS", SOSSchema);
+const SOS = mongoose.model("SOS", sosSchema);
 
 // -------------------------
-// TWILIO CONFIGURATION
+// TWILIO CONFIG
 // -------------------------
 const client = twilio(
-  "ACdcc4e29be67cdd74cd11c######", // 👉 Your Twilio SID
-  "bcdc5abddf0b26eeb12336#######"    // 👉 Your Twilio Auth Token
+  "ACdcc4e29be67cdd74cd11c0dcc0802415",
+  "4316c0cf5e1b7609af8f3bbb58284b01"
 );
 
-const TWILIO_NUMBER = "+17277#####4"; // 👉 Your Twilio Phone Number
+const TWILIO_NUMBER = "+17277613924";
 
 // -------------------------
-// ROUTES
+// AUTH ROUTES
 // -------------------------
-
-// Signup
 app.post("/signup", async (req, res) => {
   try {
-    const { email } = req.body;
-    const exists = await User.findOne({ email: email.toLowerCase().trim() });
+    const exists = await User.findOne({
+      email: req.body.email.toLowerCase().trim(),
+    });
 
     if (exists)
       return res.status(400).json({ message: "Email already registered!" });
 
     await User.create(req.body);
-
     res.json({ message: "Signup successful!" });
   } catch {
     res.status(500).json({ message: "Signup failed!" });
   }
 });
 
-// Login
 app.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const user = await User.findOne({
+      email: req.body.email.toLowerCase().trim(),
+    });
 
-    const user = await User.findOne({ email: email.toLowerCase().trim() });
+    if (!user)
+      return res.status(400).json({ message: "User not found!" });
 
-    if (!user) return res.status(400).json({ message: "User not found!" });
-
-    if (user.password.trim() !== password.trim())
+    if (user.password !== req.body.password)
       return res.status(401).json({ message: "Incorrect password!" });
 
     res.json({
@@ -128,11 +128,13 @@ app.post("/login", async (req, res) => {
       },
     });
   } catch {
-    res.status(500).json({ message: "Server error during login!" });
+    res.status(500).json({ message: "Login error!" });
   }
 });
 
-// Contact Form
+// -------------------------
+// CONTACT FORM
+// -------------------------
 app.post("/contact", async (req, res) => {
   try {
     await Contact.create(req.body);
@@ -142,73 +144,64 @@ app.post("/contact", async (req, res) => {
   }
 });
 
-// Emergency Report
+// -------------------------
+// EMERGENCY REPORT
+// -------------------------
 app.post("/report", async (req, res) => {
   try {
     await Report.create(req.body);
-    res.json({ message: "Emergency alert sent successfully!" });
+    res.json({ message: "Emergency alert sent!" });
   } catch {
-    res.status(500).json({ message: "Failed to send emergency alert!" });
+    res.status(500).json({ message: "Emergency alert failed!" });
   }
 });
 
-// FAST Live Location Save
+// -------------------------
+// LIVE LOCATION
+// -------------------------
 app.post("/api/location", async (req, res) => {
   try {
-    await Location.create({
-      userId: req.body.userId,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
-    });
+    await Location.create(req.body);
     res.json({ success: true });
   } catch {
     res.status(500).json({ success: false });
   }
 });
 
-// Fetch all locations (Admin Panel)
 app.get("/api/locations", async (req, res) => {
-  try {
-    const locations = await Location.find().sort({ timestamp: -1 });
-    res.json(locations);
-  } catch {
-    res.status(500).json({ error: "Failed to fetch locations" });
-  }
+  const locations = await Location.find().sort({ timestamp: -1 });
+  res.json(locations);
 });
 
 // -------------------------
 // SOS CONTACT & SMS
 // -------------------------
-
-// Save SOS Contact
 app.post("/save-sos", async (req, res) => {
   try {
     await SOS.create({ number: req.body.number });
-    res.json({ success: true, message: "SOS contact saved!" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: "Failed to save SOS contact!" });
+    res.json({ success: true });
+  } catch {
+    res.status(500).json({ success: false });
   }
 });
 
-// Send SOS SMS
 app.post("/send-sos", async (req, res) => {
   try {
     await client.messages.create({
-      body: "🚨 SOS ALERT! The user urgently needs help!",
+      body: "🚨 SOS ALERT! Immediate help needed!",
       from: TWILIO_NUMBER,
       to: req.body.number,
     });
 
-    res.json({ success: true, message: "SOS SMS sent!" });
+    res.json({ success: true });
   } catch (err) {
-    console.error("❌ TWILIO ERROR:", err);
-    res.status(500).json({ success: false, message: "Failed to send SMS!" });
+    console.error(err);
+    res.status(500).json({ success: false });
   }
 });
 
 // -------------------------
-// ADMIN PANEL ROUTES
+// ADMIN PANEL
 // -------------------------
 app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "public/admin/admin-login.html"));
@@ -218,32 +211,27 @@ app.get("/admin/dashboard", (req, res) => {
   res.sendFile(path.join(__dirname, "public/admin/admin-dashboard.html"));
 });
 
-// API for Admin Dashboard
 app.get("/admin/api/data", async (req, res) => {
-  try {
-    const users = await User.find();
-    const contacts = await Contact.find();
-    const reports = await Report.find();
-    const locations = await Location.find().sort({ timestamp: -1 });
-    const sos = await SOS.find();
+  const users = await User.find();
+  const contacts = await Contact.find();
+  const reports = await Report.find();
+  const locations = await Location.find().sort({ timestamp: -1 });
+  const sos = await SOS.find();
 
-    res.json({ users, contacts, reports, locations, sos });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch admin data" });
-  }
+  res.json({ users, contacts, reports, locations, sos });
 });
 
-app.use("/admin", express.static(path.join(__dirname, "admin")));
-
 app.get("/admin/logout", (req, res) => {
-  res.sendFile(path.join(__dirname, "admin", "admin-logout.html"));
+  res.sendFile(path.join(__dirname, "public/admin/admin-logout.html"));
 });
 
 // -------------------------
 // START SERVER
 // -------------------------
-app.listen(PORT, () =>
-  console.log(`🚀 Server running at http://localhost:${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
+
+
 
 

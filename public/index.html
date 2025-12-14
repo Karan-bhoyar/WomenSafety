@@ -40,6 +40,7 @@
      <li><a href="#how-it-works" class="nav-link text-white hover:text-pink-300 transition-colors">How It Works</a></li>
      <li><a href="#resources" class="nav-link text-white hover:text-pink-300 transition-colors">Resources</a></li>
      <li><a href="#contact-form" class="nav-link text-white hover:text-pink-300 transition-colors">Contact</a></li>
+      <li><a href="/selfdefence.html" class="nav-link text-white hover:text-pink-300">Self-Defence</a></li>
     </ul><!-- Auth Buttons -->
 
 
@@ -119,6 +120,11 @@
            <div class="text-xs mt-1">
             Share Location
            </div></button> 
+
+
+
+
+           
 
            <button id="call-help-btn" class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400" aria-label="Call emergency">
   <span class="text-2xl">📞</span>
@@ -683,7 +689,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
      </div><button type="submit" id="signup-submit-btn" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300"> Create Account </button>
      <div class="text-center">
-      <p class="text-sm text-gray-600">Already have an account? <button type="button" id="switch-to-login" class="text-pink-600 hover:text-pink-700 font-medium focus:outline-none focus:underline"> Sign in here </button></p>
+      <p class="text-sm text-gray-600"> Already have an account? <button type="button" id="switch-to-login" class="text-pink-600 hover:text-pink-700 font-medium focus:outline-none focus:underline"> Sign in here </button></p>
      </div>
     </form>
    </div>
@@ -836,10 +842,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-
-
-
-
   <!-- ✅ Your custom JavaScript file -->
 <script src="script.js"></script>
 <script>
@@ -934,6 +936,9 @@ document.querySelector('[aria-label="Share location"]').addEventListener("click"
         showNotification("📍 Location sharing started!");
     }
 });
+
+
+
 </script>
 
 <script>
@@ -1079,6 +1084,111 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+});
+</script>
+
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const saveBtn = document.getElementById("save-sos-btn");
+    const closeBtn = document.getElementById("close-sos-btn");
+    const numberInput = document.getElementById("sos-number");
+    const savedContactsDiv = document.getElementById("saved-contacts");
+    const shareLocationBtn = document.querySelector('[aria-label="Share location"]');
+
+    let savedContacts = JSON.parse(localStorage.getItem("sosContacts")) || [];
+
+    function renderContacts() {
+        savedContactsDiv.innerHTML = "";
+        if (savedContacts.length === 0) {
+            savedContactsDiv.innerHTML = `<div class="text-gray-400">No contacts saved</div>`;
+            return;
+        }
+
+        savedContacts.forEach(num => {
+            const div = document.createElement("div");
+            div.className = "flex justify-between items-center border border-gray-300 p-2 rounded bg-gray-100";
+
+            const span = document.createElement("span");
+            span.textContent = num;
+
+            const editBtn = document.createElement("button");
+            editBtn.textContent = "Edit";
+            editBtn.className = "ml-2 bg-yellow-600 text-white px-2 py-1 rounded text-xs hover:bg-yellow-500";
+            editBtn.onclick = () => {
+                const newNumber = prompt("Edit contact number:", num);
+                if (newNumber && newNumber.trim() !== "") {
+                    const index = savedContacts.indexOf(num);
+                    savedContacts[index] = newNumber.trim();
+                    localStorage.setItem("sosContacts", JSON.stringify(savedContacts));
+                    renderContacts();
+                }
+            };
+
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.className = "ml-2 bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-500";
+            removeBtn.onclick = () => {
+                savedContacts = savedContacts.filter(c => c !== num);
+                localStorage.setItem("sosContacts", JSON.stringify(savedContacts));
+                renderContacts();
+            };
+
+            div.appendChild(span);
+            div.appendChild(editBtn);
+            div.appendChild(removeBtn);
+            savedContactsDiv.appendChild(div);
+        });
+    }
+
+    async function sendSOS(number) {
+        try {
+            const res = await fetch("http://localhost:5000/send-sos", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ number })
+            });
+            const data = await res.json();
+            if (data.success) console.log(`SMS sent to ${number}`);
+            else console.error(`Failed to send SMS to ${number}`);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    function sendSOSAllContacts() {
+        if (savedContacts.length === 0) {
+            alert("No contacts saved to send SOS.");
+            return;
+        }
+        savedContacts.forEach(number => sendSOS(number));
+    }
+
+    // Save & send SOS from popup
+    saveBtn.onclick = () => {
+        const num = numberInput.value.trim();
+        if (!num) return;
+        if (!savedContacts.includes(num)) {
+            savedContacts.push(num);
+            localStorage.setItem("sosContacts", JSON.stringify(savedContacts));
+        }
+        sendSOS(num);
+        renderContacts();
+        numberInput.value = "";
+    };
+
+    closeBtn.onclick = () => document.getElementById("sos-popup").classList.add("hidden");
+
+    // Share Location button triggers SOS to all saved contacts
+    shareLocationBtn.addEventListener("click", () => {
+        sendSOSAllContacts();
+    });
+
+    renderContacts();
 });
 </script>
 

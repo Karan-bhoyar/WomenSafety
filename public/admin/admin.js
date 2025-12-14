@@ -29,3 +29,28 @@ function loadTable(id, items, fields) {
 }
 
 loadAdminData();
+
+
+async function loadContacts() {
+  const res = await fetch("http://localhost:5000/api/contacts");
+  const contacts = await res.json();
+
+  const tbody = document.querySelector("#contactsTable tbody");
+  tbody.innerHTML = "";
+
+  contacts.forEach(c => {
+    const row = `
+      <tr>
+        <td>${c.firstName} ${c.lastName}</td>
+        <td>${c.email}</td>
+        <td>${c.phone || "-"}</td>
+        <td>${c.subject}</td>
+        <td>${c.message}</td>
+        <td>${new Date(c.createdAt).toLocaleString()}</td>
+      </tr>
+    `;
+    tbody.innerHTML += row;
+  });
+}
+
+loadContacts();
