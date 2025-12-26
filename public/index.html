@@ -45,9 +45,45 @@
 
 
 
-    <div class="hidden md:flex items-center space-x-4 ml-8"><button id="login-btn" class="text-white hover:text-pink-300 transition-colors font-medium focus:outline-none focus:ring-2 focus:ring-pink-400 rounded px-3 py-1"> Login </button> <button id="signup-btn" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-2 rounded-lg shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-300"> Sign Up </button>
-    </div>
-    
+<div id="auth-buttons" class="flex items-center gap-2">
+  
+  <!-- Login -->
+  <button id="login-btn"
+    class="px-4 py-2 text-xs font-semibold text-white
+           rounded-md border border-white/30
+           bg-white/10 backdrop-blur-md
+           hover:bg-white/20
+           transition-all duration-200">
+    Login
+  </button>
+
+  <!-- Signup -->
+  <button id="signup-btn"
+    class="px-4 py-2 text-xs font-semibold text-white
+           rounded-md
+           bg-gradient-to-r from-pink-500 to-rose-600
+           hover:from-pink-600 hover:to-rose-700
+           shadow-sm hover:shadow-md
+           transition-all duration-200">
+    Signup
+  </button>
+
+</div>
+
+<div id="profile-box" class="hidden relative flex items-center gap-3 cursor-pointer">
+  <img src="https://i.pravatar.cc/40" class="w-10 h-10 rounded-full">
+  <span id="profile-name" class="text-white font-semibold"></span>
+
+  <!-- Logout dropdown -->
+  <div id="logout-menu"
+       class="hidden absolute right-0 top-12 bg-white rounded-lg shadow-lg w-32">
+    <button id="logout-btn"
+      class="w-full px-4 py-2 text-red-600 hover:bg-gray-100 rounded-lg">
+      Logout
+    </button>
+  </div>
+</div>
+
     <!-- Profile Menu (hidden until login) -->
 <div id="profile-menu" class="hidden relative ml-4">
   <button id="profileButton"
@@ -120,12 +156,6 @@
            <div class="text-xs mt-1">
             Share Location
            </div></button> 
-
-
-
-
-           
-
            <button id="call-help-btn" class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-pink-400" aria-label="Call emergency">
   <span class="text-2xl">📞</span>
   <div class="text-xs mt-1">Call Help</div>
@@ -138,9 +168,6 @@ class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:
     <span class="text-2xl">👥</span>
     <div class="text-xs mt-1">Alert Contacts</div>
 </button>
-
-
-
 
 <!-- SAFETY RESOURCES BUTTON -->
 <button id="safetyResourcesBtn"
@@ -183,7 +210,6 @@ class="bg-indigo-700 hover:bg-indigo-600 p-4 rounded-lg transition-colors focus:
                 <li>How to file an FIR safely</li>
             </ul>
         </div>
-
         <button id="close-safety-btn"
             class="mt-4 w-full bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 rounded-lg transition-all">
             Close
@@ -376,8 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </div>
 
-
-        <!-- Download Resources -->
+<!-- Download Resources -->
         <div class="bg-white rounded-xl p-8 shadow-lg">
           <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
             <span class="text-2xl mr-3">📄</span> Downloadable Resources
@@ -394,6 +419,8 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </section>
+
+
 
 
 <!-- Testimonials -->
@@ -503,6 +530,8 @@ document.addEventListener("DOMContentLoaded", () => {
        </div>
       </div>
       
+
+      
       <!-- Contact Form -->
       <div class="bg-gradient-to-br from-white to-cyan-50 rounded-2xl p-8 shadow-lg border border-cyan-200 relative overflow-hidden">
        <div class="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-cyan-100 to-transparent rounded-br-full opacity-30"></div>
@@ -533,7 +562,85 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
    </section>
   </main>
+  <!-- TESTIMONIALS SECTION -->
+<section class="relative py-24 px-6 bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-950">
   
+  <!-- Soft Glow Background -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.15),_transparent_60%)]"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+
+    <!-- Heading -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-pink-400 mb-4">
+        Trusted by Women Everywhere
+      </h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">
+        Real experiences from women who feel safer, stronger, and more confident using our platform.
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+      <!-- Testimonial Card -->
+      <div class="relative p-8 rounded-3xl bg-gradient-to-br from-pink-500/20 to-indigo-500/20
+                  backdrop-blur-xl border border-white/10
+                  shadow-2xl hover:scale-105 transition">
+        <p class="text-gray-200 italic mb-6">
+          “This app gives me peace of mind when I travel alone at night.
+          Knowing help is just one tap away makes all the difference.”
+        </p>
+        <div class="flex items-center gap-4">
+          <img src="https://i.pravatar.cc/80?img=47"
+               class="w-14 h-14 rounded-full border-2 border-pink-500">
+          <div>
+            <h4 class="font-semibold text-white">Ananya Sharma</h4>
+            <p class="text-sm text-gray-300">College Student</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial Card -->
+      <div class="relative p-8 rounded-3xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20
+                  backdrop-blur-xl border border-white/10
+                  shadow-2xl hover:scale-105 transition">
+        <p class="text-gray-200 italic mb-6">
+          “The SOS and live location features helped my family feel
+          connected and reassured. A must-have for every woman.”
+        </p>
+        <div class="flex items-center gap-4">
+          <img src="https://i.pravatar.cc/80?img=32"
+               class="w-14 h-14 rounded-full border-2 border-indigo-500">
+          <div>
+            <h4 class="font-semibold text-white">Ritika Verma</h4>
+            <p class="text-sm text-gray-300">Working Professional</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial Card -->
+      <div class="relative p-8 rounded-3xl bg-gradient-to-br from-rose-500/20 to-orange-400/20
+                  backdrop-blur-xl border border-white/10
+                  shadow-2xl hover:scale-105 transition">
+        <p class="text-gray-200 italic mb-6">
+          “I feel more confident walking alone now. The emergency reporting
+          feature is simple and incredibly helpful.”
+        </p>
+        <div class="flex items-center gap-4">
+          <img src="https://i.pravatar.cc/80?img=15"
+               class="w-14 h-14 rounded-full border-2 border-rose-400">
+          <div>
+            <h4 class="font-semibold text-white">Neha Kapoor</h4>
+            <p class="text-sm text-gray-300">Entrepreneur</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
   <!-- REPLACE: Footer content with your project's links and social media -->
   <footer id="contact" class="bg-gradient-to-br from-indigo-900 to-indigo-800 text-white py-12">
    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -732,7 +839,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
    </div>
   </div>
-
 
 <!-- SOS POPUP -->
 <div id="sos-popup" 
@@ -1004,93 +1110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ================= Login Modal =================
-  const loginModal = document.querySelector('#login-modal');
-  const signupModal = document.querySelector('#signup-modal');
-
-  // Open/Close modals
-  document.querySelectorAll('#switch-to-login').forEach(btn => {
-    btn.addEventListener('click', () => {
-      signupModal.classList.add('hidden');
-      loginModal.classList.remove('hidden');
-    });
-  });
-
-  document.querySelectorAll('#switch-to-signup').forEach(btn => {
-    btn.addEventListener('click', () => {
-      loginModal.classList.add('hidden');
-      signupModal.classList.remove('hidden');
-    });
-  });
-
-  document.querySelectorAll('#close-login-modal, #close-signup-modal').forEach(btn => {
-    btn.addEventListener('click', () => {
-      loginModal.classList.add('hidden');
-      signupModal.classList.add('hidden');
-    });
-  });
-
-  // Login form submit
-  const loginForm = document.querySelector('#login-form');
-  if (loginForm) {
-    loginForm.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Logged in successfully!');
-      loginForm.reset();
-      loginModal.classList.add('hidden');
-    });
-  }
-
-  // Signup form submit
-  const signupForm = document.querySelector('#signup-form');
-  if (signupForm) {
-    signupForm.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Account created successfully!');
-      signupForm.reset();
-      signupModal.classList.add('hidden');
-    });
-  }
-
-  // ================= Toggle password visibility =================
-  document.querySelectorAll('#toggle-login-password, #toggle-signup-password').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const input = btn.previousElementSibling;
-      input.type = input.type === 'password' ? 'text' : 'password';
-    });
-  });
-
-  // ================= Emergency Report Modal =================
-  const reportModal = document.querySelector('#report-modal');
-  const reportForm = document.querySelector('#emergency-form');
-
-  const openReportBtns = document.querySelectorAll('.open-report-modal');
-  const closeReportBtn = document.querySelector('#close-modal-btn');
-
-  openReportBtns.forEach(btn => {
-    btn.addEventListener('click', () => reportModal.classList.remove('hidden'));
-  });
-
-  if (closeReportBtn) {
-    closeReportBtn.addEventListener('click', () => reportModal.classList.add('hidden'));
-  }
-
-  if (reportForm) {
-    reportForm.addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Emergency report submitted! Help is on the way.');
-      reportForm.reset();
-      reportModal.classList.add('hidden');
-    });
-  }
-
 });
 </script>
-
-
-
-
-
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -1191,6 +1212,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderContacts();
 });
 </script>
+
+<script src="script.js"></script>
 
   </body>
   

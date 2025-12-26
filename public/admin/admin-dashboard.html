@@ -166,8 +166,49 @@
       <h2 class="section-title">📞 SOS Contacts</h2>
       <table id="sosTable"></table>
     </div>
+<h2 class="text-2xl font-bold mt-10 mb-4 text-pink-400">
+  Self Defence Form
+</h2>
+
+<table class="w-full bg-gray-900 rounded-lg overflow-hidden">
+  <thead class="bg-gray-800">
+    <tr>
+      <th class="p-3">Name</th>
+      <th class="p-3">Email</th>
+      <th class="p-3">Phone</th>
+      <th class="p-3">Training</th>
+      <th class="p-3">Message</th>
+    </tr>
+  </thead>
+  <tbody id="selfDefenceTable"></tbody>
+</table>
+<script>
+async function loadAdminData() {
+  const res = await fetch("/admin/api/data");
+  const data = await res.json();
+
+  const table = document.getElementById("selfDefenceTable");
+  table.innerHTML = "";
+
+  data.selfDefence.forEach(item => {
+    table.innerHTML += `
+      <tr class="border-b border-gray-800">
+        <td class="p-3">${item.name}</td>
+        <td class="p-3">${item.email}</td>
+        <td class="p-3">${item.phone}</td>
+        <td class="p-3">${item.training}</td>
+        <td class="p-3">${item.message || "-"}</td>
+      </tr>
+    `;
+  });
+}
+
+loadAdminData();
+</script>
 
   </div>
+
+
 
   <script src="admin.js"></script>
 </body>

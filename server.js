@@ -4,7 +4,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const twilio = require("twilio");
-
+const bcrypt = require("bcryptjs");
 const app = express();
 const PORT = 5000;
 
@@ -69,6 +69,15 @@ const sosSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+const selfDefenceSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phone: String,
+  training: String,
+  message: String,
+  createdAt: { type: Date, default: Date.now },
+});
+
 // -------------------------
 // MODELS
 // -------------------------
@@ -77,6 +86,7 @@ const Contact = mongoose.model("Contact", contactSchema);
 const Report = mongoose.model("Report", reportSchema);
 const Location = mongoose.model("Location", locationSchema);
 const SOS = mongoose.model("SOS", sosSchema);
+const SelfDefence = mongoose.model("SelfDefence", selfDefenceSchema);
 
 // -------------------------
 // TWILIO CONFIG
@@ -91,46 +101,7 @@ const TWILIO_NUMBER = "+17277613924";
 // -------------------------
 // AUTH ROUTES
 // -------------------------
-app.post("/signup", async (req, res) => {
-  try {
-    const exists = await User.findOne({
-      email: req.body.email.toLowerCase().trim(),
-    });
 
-    if (exists)
-      return res.status(400).json({ message: "Email already registered!" });
-
-    await User.create(req.body);
-    res.json({ message: "Signup successful!" });
-  } catch {
-    res.status(500).json({ message: "Signup failed!" });
-  }
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    const user = await User.findOne({
-      email: req.body.email.toLowerCase().trim(),
-    });
-
-    if (!user)
-      return res.status(400).json({ message: "User not found!" });
-
-    if (user.password !== req.body.password)
-      return res.status(401).json({ message: "Incorrect password!" });
-
-    res.json({
-      message: "Login successful!",
-      user: {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-      },
-    });
-  } catch {
-    res.status(500).json({ message: "Login error!" });
-  }
-});
 
 // -------------------------
 // CONTACT FORM
@@ -141,6 +112,19 @@ app.post("/contact", async (req, res) => {
     res.json({ message: "Message sent successfully!" });
   } catch {
     res.status(500).json({ message: "Failed to send message!" });
+  }
+});
+
+
+// -------------------------
+// SELF DEFENCE FORM
+// -------------------------
+app.post("/self-defence", async (req, res) => {
+  try {
+    await SelfDefence.create(req.body);
+    res.json({ message: "Self defence request submitted!" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to submit request" });
   }
 });
 
@@ -212,14 +196,29 @@ app.get("/admin/dashboard", (req, res) => {
 });
 
 app.get("/admin/api/data", async (req, res) => {
-  const users = await User.find();
-  const contacts = await Contact.find();
-  const reports = await Report.find();
-  const locations = await Location.find().sort({ timestamp: -1 });
-  const sos = await SOS.find();
+  try {
+    const users = await User.find();
+    const contacts = await Contact.find();
+    const reports = await Report.find();
+    const locations = await Location.find().sort({ timestamp: -1 });
+    const sos = await SOS.find();
+    const selfDefence = await SelfDefence.find().sort({ createdAt: -1 });
 
-  res.json({ users, contacts, reports, locations, sos });
+    // ⚠️ ONLY ONE RESPONSE
+    res.json({
+      users,
+      contacts,
+      reports,
+      locations,
+      sos,
+      selfDefence
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Admin data fetch failed" });
+  }
 });
+
 
 app.get("/admin/logout", (req, res) => {
   res.sendFile(path.join(__dirname, "public/admin/admin-logout.html"));
@@ -230,8 +229,92 @@ app.get("/admin/logout", (req, res) => {
 // -------------------------
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
+ 
 });
 
+app.post("/signup", async (req, res) => {
+  try {
+    const { firstName, lastName, email, password, phone, emergencyContact, emergencyPhone } = req.body;
 
+    // Check if user exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ message: "Email already exists!" });
 
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Save user
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      phone,
+      emergencyContact,
+      emergencyPhone
+    });
+
+    await newUser.save();
+    res.status(201).json({ message: "✅ Account created successfully!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Login route
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "❌ Invalid email or password" });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ message: "❌ Invalid email or password" });
+
+    // Send user data (without password)
+    const { password: _, ...userData } = user._doc;
+    res.json({ message: `✅ Logged in as ${email}`, user: userData });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
+
+// Get user profile (example)
+app.get("/profile/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email }).select("-password");
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+// Signup
+app.post("/api/signup", async (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
+
+  const existingUser = await User.findOne({ email });
+  if(existingUser) return res.json({ success: false, message: "Email already exists" });
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = new User({ firstName, lastName, email, password: hashedPassword });
+  await newUser.save();
+  res.json({ success: true, message: "Account created successfully" });
+});
+
+// Login
+app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if(!user) return res.json({ success: false, message: "User not found" });
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if(!isMatch) return res.json({ success: false, message: "Incorrect password" });
+
+  res.json({ success: true, user });
+});

@@ -213,6 +213,80 @@
 </section>
 
 
+
+<!-- SELF DEFENCE FORM -->
+<section class="max-w-3xl mx-auto py-20 px-6">
+  <h2 class="text-3xl font-bold text-center text-pink-400 mb-8">
+    Self Defence Support Form
+  </h2>
+
+  <form id="selfDefenceForm" class="bg-gray-900 p-8 rounded-2xl space-y-5 shadow-xl">
+
+    <input type="text" name="name" required
+      placeholder="Your Full Name"
+      class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700">
+
+    <input type="email" name="email" required
+      placeholder="Email Address"
+      class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700">
+
+    <input type="tel" name="phone" required
+      placeholder="Phone Number"
+      class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700">
+
+    <select name="training" required
+      class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700">
+      <option value="">Select Training Type</option>
+      <option>Basic Self Defence</option>
+      <option>Street Safety</option>
+      <option>Martial Arts</option>
+    </select>
+
+    <textarea name="message" rows="4"
+      placeholder="Any message or concern"
+      class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700"></textarea>
+
+    <button type="submit"
+      class="w-full bg-pink-500 hover:bg-pink-600 py-3 rounded-lg font-semibold transition">
+      Submit
+    </button>
+
+  </form>
+</section>
+
+<script>
+  document.getElementById("selfDefenceForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = Object.fromEntries(new FormData(this));
+
+    try {
+      const res = await fetch("http://localhost:5000/self-defence", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert("✅ Self defence request submitted successfully!");
+        this.reset();
+      } else {
+        alert("❌ Failed: " + result.message);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("❌ Server error. Please try again later.");
+    }
+  });
+</script>
+
+
+
+
   <script>
     const carousel = document.getElementById('tipsCarousel');
     let index = 0;

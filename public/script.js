@@ -1,261 +1,221 @@
  document.addEventListener("DOMContentLoaded", () => {
-  
 
+  // ---------------- AUTH MODALS ----------------
+  const loginModal = document.getElementById('login-modal');
+  const signupModal = document.getElementById('signup-modal');
+  const loginBtn = document.getElementById('login-btn');
+  const signupBtn = document.getElementById('signup-btn');
+  const mobileLoginBtn = document.getElementById('mobile-login-btn');
+  const mobileSignupBtn = document.getElementById('mobile-signup-btn');
+  const closeLoginModal = document.getElementById('close-login-modal');
+  const closeSignupModal = document.getElementById('close-signup-modal');
+  const switchToSignup = document.getElementById('switch-to-signup');
+  const switchToLogin = document.getElementById('switch-to-login');
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+  const header = document.getElementById('header');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-    // Auth modal elements
-    const loginModal = document.getElementById('login-modal');
-    const signupModal = document.getElementById('signup-modal');
-    const loginBtn = document.getElementById('login-btn');
-    const signupBtn = document.getElementById('signup-btn');
-    const mobileLoginBtn = document.getElementById('mobile-login-btn');
-    const mobileSignupBtn = document.getElementById('mobile-signup-btn');
-    const closeLoginModal = document.getElementById('close-login-modal');
-    const closeSignupModal = document.getElementById('close-signup-modal');
-    const switchToSignup = document.getElementById('switch-to-signup');
-    const switchToLogin = document.getElementById('switch-to-login');
-    const loginForm = document.getElementById('login-form');
-    const signupForm = document.getElementById('signup-form');
+  // Mobile menu toggle
+  mobileMenuBtn?.addEventListener('click', () => mobileMenu?.classList.toggle('hidden'));
 
-    // Mobile menu functionality
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const header = document.getElementById('header');
+  const openLoginModal = () => {
+    loginModal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    mobileMenu?.classList.add('hidden');
+  };
 
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
+  const openSignupModal = () => {
+    signupModal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    mobileMenu?.classList.add('hidden');
+  };
 
-    // Auth modal functions
-    const openLoginModal = () => {
-      loginModal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      mobileMenu.classList.add('hidden');
-    };
+  const closeAuthModals = () => {
+    loginModal?.classList.add('hidden');
+    signupModal?.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    loginForm?.reset();
+    signupForm?.reset();
 
-    const openSignupModal = () => {
-      signupModal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      mobileMenu.classList.add('hidden');
-    };
+    const strengthBar = document.getElementById('password-strength-bar');
+    const strengthText = document.getElementById('password-strength-text');
+    const matchMessage = document.getElementById('password-match-message');
 
-    const closeAuthModals = () => {
-      loginModal.classList.add('hidden');
-      signupModal.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-      loginForm.reset();
-      signupForm.reset();
-      // Reset password strength indicators
-      const strengthBar = document.getElementById('password-strength-bar');
-      const strengthText = document.getElementById('password-strength-text');
-      const matchMessage = document.getElementById('password-match-message');
-      if (strengthBar) {
-        strengthBar.style.width = '0%';
-        strengthBar.className = 'bg-red-500 h-2 rounded-full transition-all duration-300';
-      }
-      if (strengthText) strengthText.textContent = 'Enter a password';
-      if (matchMessage) matchMessage.classList.add('hidden');
-    };
+    if (strengthBar) strengthBar.style.width = '0%';
+    if (strengthText) strengthText.textContent = 'Enter a password';
+    if (matchMessage) matchMessage.classList.add('hidden');
+  };
 
-    // Auth event listeners
-    loginBtn.addEventListener('click', openLoginModal);
-    signupBtn.addEventListener('click', openSignupModal);
-    mobileLoginBtn.addEventListener('click', openLoginModal);
-    mobileSignupBtn.addEventListener('click', openSignupModal);
-    closeLoginModal.addEventListener('click', closeAuthModals);
-    closeSignupModal.addEventListener('click', closeAuthModals);
+  // Event listeners for auth
+  [loginBtn, mobileLoginBtn].forEach(btn => btn?.addEventListener('click', openLoginModal));
+  [signupBtn, mobileSignupBtn].forEach(btn => btn?.addEventListener('click', openSignupModal));
+  [closeLoginModal, closeSignupModal].forEach(btn => btn?.addEventListener('click', closeAuthModals));
 
-    // Switch between modals
-    switchToSignup.addEventListener('click', () => {
-      loginModal.classList.add('hidden');
-      signupModal.classList.remove('hidden');
-      loginForm.reset();
-    });
+  switchToSignup?.addEventListener('click', () => {
+    loginModal?.classList.add('hidden');
+    signupModal?.classList.remove('hidden');
+    loginForm?.reset();
+  });
 
-    switchToLogin.addEventListener('click', () => {
-      signupModal.classList.add('hidden');
-      loginModal.classList.remove('hidden');
-      signupForm.reset();
-    });
+  switchToLogin?.addEventListener('click', () => {
+    signupModal?.classList.add('hidden');
+    loginModal?.classList.remove('hidden');
+    signupForm?.reset();
+  });
 
-    // Close modals when clicking outside
-    loginModal.addEventListener('click', (e) => {
-      if (e.target === loginModal) closeAuthModals();
-    });
+  // Close modals when clicking outside
+  loginModal?.addEventListener('click', e => { if(e.target === loginModal) closeAuthModals(); });
+  signupModal?.addEventListener('click', e => { if(e.target === signupModal) closeAuthModals(); });
 
-    signupModal.addEventListener('click', (e) => {
-      if (e.target === signupModal) closeAuthModals();
-    });
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 50) {
+      header?.classList.add('bg-indigo-900', 'bg-opacity-95', 'backdrop-blur-sm');
+    } else {
+      header?.classList.remove('bg-indigo-900', 'bg-opacity-95', 'backdrop-blur-sm');
+    }
+  });
 
-    // Header background on scroll
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('bg-indigo-900', 'bg-opacity-95', 'backdrop-blur-sm');
-      } else {
-        header.classList.remove('bg-indigo-900', 'bg-opacity-95', 'backdrop-blur-sm');
-      }
-    });
+  // ---------------- PASSWORD VISIBILITY ----------------
+  const toggleLoginPassword = document.getElementById('toggle-login-password');
+  const toggleSignupPassword = document.getElementById('toggle-signup-password');
+  const loginPasswordInput = document.getElementById('login-password');
+  const signupPasswordInput = document.getElementById('signup-password');
 
-    // Password visibility toggles
-    const toggleLoginPassword = document.getElementById('toggle-login-password');
-    const toggleSignupPassword = document.getElementById('toggle-signup-password');
-    const loginPasswordInput = document.getElementById('login-password');
-    const signupPasswordInput = document.getElementById('signup-password');
+  toggleLoginPassword?.addEventListener('click', () => {
+    if(loginPasswordInput) loginPasswordInput.type = loginPasswordInput.type === 'password' ? 'text' : 'password';
+  });
 
-    toggleLoginPassword.addEventListener('click', () => {
-      const type = loginPasswordInput.type === 'password' ? 'text' : 'password';
-      loginPasswordInput.type = type;
-    });
+  toggleSignupPassword?.addEventListener('click', () => {
+    if(signupPasswordInput) signupPasswordInput.type = signupPasswordInput.type === 'password' ? 'text' : 'password';
+  });
 
-    toggleSignupPassword.addEventListener('click', () => {
-      const type = signupPasswordInput.type === 'password' ? 'text' : 'password';
-      signupPasswordInput.type = type;
-    });
+  // ---------------- PASSWORD STRENGTH ----------------
+  const passwordStrengthBar = document.getElementById('password-strength-bar');
+  const passwordStrengthText = document.getElementById('password-strength-text');
+  const confirmPasswordInput = document.getElementById('signup-confirm-password');
+  const passwordMatchMessage = document.getElementById('password-match-message');
 
-    // Password strength checker
-    const passwordStrengthBar = document.getElementById('password-strength-bar');
-    const passwordStrengthText = document.getElementById('password-strength-text');
-    const confirmPasswordInput = document.getElementById('signup-confirm-password');
-    const passwordMatchMessage = document.getElementById('password-match-message');
-
-    signupPasswordInput.addEventListener('input', (e) => {
-      const password = e.target.value;
-      const strength = calculatePasswordStrength(password);
-      
-      passwordStrengthBar.style.width = `${strength.percentage}%`;
-      passwordStrengthBar.className = `${strength.colorClass} h-2 rounded-full transition-all duration-300`;
+  signupPasswordInput?.addEventListener('input', e => {
+    const strength = calculatePasswordStrength(e.target.value);
+    if(passwordStrengthBar) passwordStrengthBar.style.width = `${strength.percentage}%`;
+    if(passwordStrengthBar) passwordStrengthBar.className = `${strength.colorClass} h-2 rounded-full transition-all duration-300`;
+    if(passwordStrengthText) {
       passwordStrengthText.textContent = strength.text;
       passwordStrengthText.className = `text-xs ${strength.textColorClass} mt-1`;
-    });
-
-    confirmPasswordInput.addEventListener('input', (e) => {
-      const password = signupPasswordInput.value;
-      const confirmPassword = e.target.value;
-      
-      if (confirmPassword.length > 0) {
-        if (password === confirmPassword) {
-          passwordMatchMessage.textContent = '✓ Passwords match';
-          passwordMatchMessage.className = 'text-xs text-green-600 mt-1';
-          passwordMatchMessage.classList.remove('hidden');
-        } else {
-          passwordMatchMessage.textContent = '✗ Passwords do not match';
-          passwordMatchMessage.className = 'text-xs text-red-600 mt-1';
-          passwordMatchMessage.classList.remove('hidden');
-        }
-      } else {
-        passwordMatchMessage.classList.add('hidden');
-      }
-    });
-
-    function calculatePasswordStrength(password) {
-      let score = 0;
-      if (password.length >= 8) score += 25;
-      if (password.match(/[a-z]/)) score += 25;
-      if (password.match(/[A-Z]/)) score += 25;
-      if (password.match(/[0-9]/)) score += 15;
-      if (password.match(/[^a-zA-Z0-9]/)) score += 10;
-
-      if (score < 30) {
-        return {
-          percentage: score,
-          colorClass: 'bg-red-500',
-          textColorClass: 'text-red-600',
-          text: 'Weak password'
-        };
-      } else if (score < 60) {
-        return {
-          percentage: score,
-          colorClass: 'bg-yellow-500',
-          textColorClass: 'text-yellow-600',
-          text: 'Fair password'
-        };
-      } else if (score < 90) {
-        return {
-          percentage: score,
-          colorClass: 'bg-blue-500',
-          textColorClass: 'text-blue-600',
-          text: 'Good password'
-        };
-      } else {
-        return {
-          percentage: score,
-          colorClass: 'bg-green-500',
-          textColorClass: 'text-green-600',
-          text: 'Strong password'
-        };
-      }
     }
+  });
 
-    // Login form submission
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
-      const rememberMe = document.getElementById('remember-me').checked;
-      const submitBtn = document.getElementById('login-submit-btn');
+  confirmPasswordInput?.addEventListener('input', e => {
+    if(!signupPasswordInput) return;
+    const password = signupPasswordInput.value;
+    const confirmPassword = e.target.value;
 
- 
-  // Simulate login delay
-  setTimeout(() => {
-    // Example condition for validation
-    if (email === "user@gmail.com" && password === "12345") {
-      // ✅ Success
-      toastMessage.textContent = `Welcome back! Successfully logged in as ${email}`;
-      toast.classList.remove('hidden');
-    } else {
-      // ❌ Failure
-      toastMessage.textContent = `Login failed! Invalid email or password.`;
-      toast.classList.remove('hidden');
-      toast.classList.add('bg-red-500'); // Optional: red color for error
-    }
-
-    // Re-enable button
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Login';
-  }, 2000);
-});
-    // Signup form submission
-    signupForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const firstName = document.getElementById('signup-first-name').value;
-      const lastName = document.getElementById('signup-last-name').value;
-      const email = document.getElementById('signup-email').value;
-      const phone = document.getElementById('signup-phone').value;
-      const password = document.getElementById('signup-password').value;
-      const confirmPassword = document.getElementById('signup-confirm-password').value;
-      const emergencyContact = document.getElementById('signup-emergency-contact').value;
-      const emergencyPhone = document.getElementById('signup-emergency-phone').value;
-      const termsAccepted = document.getElementById('signup-terms').checked;
-      const notifications = document.getElementById('signup-notifications').checked;
-      const submitBtn = document.getElementById('signup-submit-btn');
-
-      // Validate passwords match
-      if (password !== confirmPassword) {
+    if(confirmPassword.length > 0) {
+      if(password === confirmPassword) {
+        passwordMatchMessage.textContent = '✓ Passwords match';
+        passwordMatchMessage.className = 'text-xs text-green-600 mt-1';
+      } else {
         passwordMatchMessage.textContent = '✗ Passwords do not match';
         passwordMatchMessage.className = 'text-xs text-red-600 mt-1';
-        passwordMatchMessage.classList.remove('hidden');
-        return;
       }
+      passwordMatchMessage.classList.remove('hidden');
+    } else {
+      passwordMatchMessage?.classList.add('hidden');
+    }
+  });
 
-      // Simulate signup
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Creating Account...';
+  function calculatePasswordStrength(password) {
+    let score = 0;
+    if(password.length >= 8) score += 25;
+    if(password.match(/[a-z]/)) score += 25;
+    if(password.match(/[A-Z]/)) score += 25;
+    if(password.match(/[0-9]/)) score += 15;
+    if(password.match(/[^a-zA-Z0-9]/)) score += 10;
 
-      setTimeout(() => {
-        // Show success toast
-        toastMessage.textContent = `Welcome ${firstName}! Your SafeSteps account has been created successfully.`;
-        toast.classList.remove('hidden');
-        
-        setTimeout(() => {
-          toast.classList.add('hidden');
-        }, 5000);
+    if(score < 30) return {percentage: score, colorClass: 'bg-red-500', textColorClass: 'text-red-600', text: 'Weak password'};
+    if(score < 60) return {percentage: score, colorClass: 'bg-yellow-500', textColorClass: 'text-yellow-600', text: 'Fair password'};
+    if(score < 90) return {percentage: score, colorClass: 'bg-blue-500', textColorClass: 'text-blue-600', text: 'Good password'};
+    return {percentage: score, colorClass: 'bg-green-500', textColorClass: 'text-green-600', text: 'Strong password'};
+  }
 
-        closeAuthModals();
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Create Account';
-      }, 2500);
+ // ---------------- SIGNUP ----------------
+signupForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const firstName = document.getElementById('signup-first-name').value;
+  const lastName = document.getElementById('signup-last-name').value;
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
+  const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+  if(password !== confirmPassword){
+    alert("Passwords do not match!");
+    return;
+  }
+
+  try {
+    const res = await fetch('http://localhost:5000/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ firstName, lastName, email, password })
     });
+
+    const data = await res.json();
+    if(data.success){
+      alert("✅ Account created successfully!");
+      closeAuthModals();
+      // redirect to login page/modal
+      openLoginModal();
+    } else {
+      alert("❌ " + data.message);
+    }
+
+  } catch(err) {
+    console.error(err);
+    alert("Server error!");
+  }
+});
+
+
+
+// ---------------- LOGIN ----------------
+loginForm?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  try {
+    const res = await fetch('http://localhost:5000/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+   if (data.success) {
+  alert("✅ Logged in successfully!");
+
+  // save user
+  localStorage.setItem("user", JSON.stringify(data.user));
+
+  // SHOW PROFILE ON RIGHT SIDE
+  showProfile(data.user);
+
+  closeAuthModals();
+}
+ else {
+      alert("❌ " + data.message);
+    }
+
+  } catch(err) {
+    console.error(err);
+    alert("Server error!");
+  }
+});
+
+
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -540,131 +500,6 @@
   });
 });
 
-// ✅ Signup Form
-const signupForm = document.getElementById("signup-form");
-if (signupForm) {
-  let isSubmitting = false;
-
-  signupForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (isSubmitting) return;
-    isSubmitting = true;
-
-    // Get form values
-    const firstName = document.getElementById("signup-first-name").value.trim();
-    const lastName = document.getElementById("signup-last-name").value.trim();
-    const email = document.getElementById("signup-email").value.trim();
-    const phone = document.getElementById("signup-phone").value.trim();
-    const password = document.getElementById("signup-password").value.trim();
-    const confirmPassword = document.getElementById("signup-confirm-password").value.trim();
-    const emergencyContact = document.getElementById("signup-emergency-contact").value.trim();
-    const emergencyPhone = document.getElementById("signup-emergency-phone").value.trim();
-    const notifications = document.getElementById("signup-notifications").checked;
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      isSubmitting = false;
-      return;
-    }
-
-    const signupData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      password,
-      emergencyContact,
-      emergencyPhone,
-      notifications,
-    };
-
-    try {
-      const res = await fetch("/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(signupData),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("✅ Signup successful! Please login now.");
-
-        signupForm.reset();
-
-        const signupModal = document.getElementById("signup-modal");
-        const loginModal = document.getElementById("login-modal");
-
-        // ✅ Step 1: hide signup modal completely
-        if (signupModal) signupModal.classList.add("hidden");
-
-        // ✅ Step 2: delay a bit to allow transition & click to end
-        setTimeout(() => {
-          // Remove any inline styles or extra 'hidden' states
-          if (loginModal) {
-            loginModal.classList.remove("hidden");
-            loginModal.style.display = "flex"; // ensure it shows properly
-          }
-        }, 800);
-      } else {
-        alert(data.message || "Signup failed. Try again.");
-      }
-    } catch (err) {
-      console.error("❌ Signup Error:", err);
-      alert("Signup failed! Server error.");
-    } finally {
-      isSubmitting = false;
-    }
-  });
-}
-
-
-// ✅ Login Form
-const loginForm = document.getElementById("login-form");
-if (loginForm) {
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById("login-email").value.trim();
-    const password = document.getElementById("login-password").value.trim();
-
-    if (!email || !password) {
-      alert("Please fill in all fields!");
-      return;
-    }
-
-    try {
-      const res = await fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        alert("✅ Login successful!");
-
-        // ✅ Clear form and close modal
-        loginForm.reset();
-        const loginModal = document.getElementById("login-modal");
-        if (loginModal) loginModal.classList.add("hidden");
-
-        // ✅ Redirect to home page (index.html)
-        window.location.href = "index.html";
-      } else {
-        alert(data.message || "Login failed. Try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Login failed! Server error.");
-    }
-  });
-}
-
-
-
-
 // ✅ Contact Form
 const contactForm = document.getElementById("contact-form");
 if (contactForm) {
@@ -695,8 +530,6 @@ if (contactForm) {
     }
   });
 }
-
-
 
 // 🚨 Emergency Report Form
 const emergencyForm = document.getElementById("emergency-form");
@@ -752,70 +585,6 @@ if (emergencyForm) {
   }
 }
 
-
-document.addEventListener("DOMContentLoaded", () => {
-  const loginBtn = document.getElementById("login-btn");
-  const signupBtn = document.getElementById("signup-btn");
-  const profileMenu = document.getElementById("profile-menu");
-  const profileButton = document.getElementById("profileButton");
-  const profileName = document.getElementById("profile-name");
-  const dropdownMenu = document.getElementById("dropdown-menu");
-  const logoutBtn = document.getElementById("logoutBtn");
-
-  // ✅ Check if user already logged in
-  const user = localStorage.getItem("loggedUser");
-  if (user) showProfile(user);
-
-  // ✅ Simulate login success only once
-  const loginForm = document.getElementById("login-form");
-  if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      e.stopImmediatePropagation(); // 💥 Prevent double event trigger
-
-      const email = document.getElementById("login-email").value;
-      const name = email.split("@")[0];
-      localStorage.setItem("loggedUser", name);
-      showProfile(name);
-
-      const loginModal = document.getElementById("login-modal");
-      if (loginModal) loginModal.classList.add("hidden");
-
-      // ✅ Removed alert for login success
-    });
-  }
-
-  // ✅ Show profile function
-  function showProfile(name) {
-    if (!loginBtn || !signupBtn || !profileMenu) return;
-    loginBtn.classList.add("hidden");
-    signupBtn.classList.add("hidden");
-    profileMenu.classList.remove("hidden");
-    profileName.textContent = name;
-  }
-
-  // ✅ Logout function
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("loggedUser");
-      loginBtn.classList.remove("hidden");
-      signupBtn.classList.remove("hidden");
-      profileMenu.classList.add("hidden");
-      dropdownMenu.classList.add("hidden");
-      alert("Logged out successfully!");
-    });
-  }
-
-  // ✅ Toggle dropdown visibility
-  if (profileButton) {
-    profileButton.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("hidden");
-    });
-  }
-});
-
-
-
 // Show popup when button clicked
 document.getElementById("call-help-btn").addEventListener("click", () => {
     document.getElementById("sos-popup").classList.remove("hidden");
@@ -868,9 +637,6 @@ document.getElementById("save-sos-btn").addEventListener("click", async () => {
     }
 });
 
-
-
-
 // Show popup (example: when clicking a button)
 document.getElementById("call-help-btn").addEventListener("click", () => {
     document.getElementById("sos-popup").classList.remove("hidden");
@@ -899,9 +665,6 @@ document.querySelectorAll('.grid a[href^="tel:"]').forEach(link => {
         }
     });
 });
-
-
-
 
 function initMap() {
     // Default location (center of the map)
@@ -963,10 +726,6 @@ function initMap() {
 // Initialize map after page loads
 window.addEventListener("load", initMap);
 
-
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const alertBtn = document.getElementById("alertContactsBtn");
@@ -1003,12 +762,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
-
-
-
-
-
 document.getElementById("contact-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -1032,6 +785,43 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   e.target.reset();
 });
 
+function showProfile(user) {
+  if (!user) return;
 
+  document.getElementById("auth-buttons").classList.add("hidden");
 
+  const profileBox = document.getElementById("profile-box");
+  const profileName = document.getElementById("profile-name");
 
+  profileName.innerText = user.firstName || "User";
+  profileBox.classList.remove("hidden");
+}
+
+const profileBox = document.getElementById("profile-box");
+const logoutMenu = document.getElementById("logout-menu");
+const logoutBtn = document.getElementById("logout-btn");
+const authButtons = document.getElementById("auth-buttons");
+
+// Show / hide logout on profile click
+profileBox.addEventListener("click", (e) => {
+  e.stopPropagation();
+  logoutMenu.classList.toggle("hidden");
+});
+
+// Logout
+logoutBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  localStorage.removeItem("user"); // clear session
+
+  profileBox.classList.add("hidden");
+  authButtons.classList.remove("hidden");
+  logoutMenu.classList.add("hidden");
+
+  alert("✅ Logged out successfully");
+});
+
+// Close dropdown when clicking outside
+document.addEventListener("click", () => {
+  logoutMenu.classList.add("hidden");
+});
