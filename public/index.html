@@ -425,6 +425,204 @@ document.addEventListener("DOMContentLoaded", () => {
 </section>
 
 
+<!-- WOMEN SAFETY CHATBOT -->
+<div id="ws-chatbot">
+  <div id="ws-header">
+    🛡️ Women Safety Assistant
+    <span id="ws-close">✖</span>
+  </div>
+
+  <div id="ws-body">
+    <div class="bot-msg">Hello 👋 I am your Women Safety Assistant.</div>
+    <div class="bot-msg">Ask me about emergency help, laws, safety tips.</div>
+  </div>
+
+  <div id="ws-footer">
+    <input id="ws-input" placeholder="Type your message..." />
+    <button id="ws-send">Send</button>
+  </div>
+</div>
+
+<button id="ws-open-btn">🛡️ Help</button>
+
+<style>
+/* CHAT WINDOW */
+#ws-chatbot {
+  position: fixed;
+  bottom: 180px;  /* chat window above button */
+  right: 20px;
+  width: 320px;
+  max-height: 480px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  display: none;
+  flex-direction: column;
+  z-index: 999999;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+#ws-header {
+  background: #1e40af;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BODY */
+#ws-body {
+  padding: 10px;
+  overflow-y: auto;
+  flex: 1;
+  font-size: 14px;
+}
+
+/* MESSAGES */
+.bot-msg, .user-msg {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  max-width: 85%;
+  white-space: pre-line;
+}
+
+.bot-msg {
+  background: #e0e7ff;
+}
+
+.user-msg {
+  background: #d1fae5;
+  margin-left: auto;
+}
+
+/* FOOTER */
+#ws-footer {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+#ws-input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  outline: none;
+}
+
+#ws-send {
+  border: none;
+  padding: 10px 14px;
+  background: #1e40af;
+  color: white;
+  cursor: pointer;
+}
+
+/* HELP BUTTON SMALLER, LOWER, MORE LEFT */
+#ws-open-btn {
+  position: fixed;
+  bottom: 100px;   /* slightly lower */
+  right: 10px;     /* moved slightly to the left */
+  background: #1e40af;
+  color: white;
+  border: none;
+  padding: 8px 12px;   /* smaller button */
+  border-radius: 30px;  /* pill shape */
+  font-size: 14px;      /* smaller text */
+  z-index: 999999;
+  cursor: pointer;
+}
+
+/* MOBILE SAFE */
+@media (max-width: 768px) {
+  #ws-chatbot {
+    bottom: 200px;
+  }
+  #ws-open-btn {
+    bottom: 80px;
+    right: 8px;   /* slightly more left on mobile */
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+const chatbot = document.getElementById("ws-chatbot");
+const openBtn = document.getElementById("ws-open-btn");
+const closeBtn = document.getElementById("ws-close");
+const input = document.getElementById("ws-input");
+const sendBtn = document.getElementById("ws-send");
+const body = document.getElementById("ws-body");
+
+openBtn.onclick = () => chatbot.style.display = "flex";
+closeBtn.onclick = () => chatbot.style.display = "none";
+
+sendBtn.onclick = sendMsg;
+input.addEventListener("keydown", e => e.key === "Enter" && sendMsg());
+
+function sendMsg() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMsg(text, "user-msg");
+  input.value = "";
+
+  setTimeout(() => {
+    addMsg(getBotReply(text.toLowerCase()), "bot-msg");
+  }, 400);
+}
+
+function addMsg(text, cls) {
+  const div = document.createElement("div");
+  div.className = cls;
+  div.innerText = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function getBotReply(msg) {
+  msg = msg.toLowerCase();  // convert all to lowercase
+  msg = msg.replace(/[^a-zA-Z\s]/g, ""); // remove punctuation
+
+  // Keywords for each category
+  const dangerWords = ["danger", "unsafe", "help now"];
+  const emergencyWords = ["emergency"];
+  const helplineWords = ["helpline", "number"];
+  const harassmentWords = ["harassment", "stalking", "molest"];
+  const domesticWords = ["domestic", "violence", "husband"];
+  const lawWords = ["law", "rights"];
+  const selfDefWords = ["self defense", "defense", "protect myself"];
+  const safetyWords = ["safety", "tips", "precaution", "secure"];
+
+  // Check categories
+  if (dangerWords.some(word => msg.includes(word))) {
+    return "🚨 If you are in immediate danger:\n• Call 112\n• Go to a crowded place\n• Share location with a trusted person";
+  }
+
+  if (emergencyWords.some(word => msg.includes(word))) return "🚑 Emergency number in India: 112";
+
+  if (helplineWords.some(word => msg.includes(word))) return "📞 Women Helplines:\n• 181\n• 1091";
+
+  if (harassmentWords.some(word => msg.includes(word))) return "Harassment is a crime. Save evidence and contact police.";
+
+  if (domesticWords.some(word => msg.includes(word))) return "Domestic violence is illegal. Call 181 or contact a local NGO.";
+
+  if (lawWords.some(word => msg.includes(word))) return "⚖️ Laws protect women against harassment, violence, stalking, and abuse.";
+
+  if (selfDefWords.some(word => msg.includes(word))) return "🥋 Self-defense tips:\n• Stay alert\n• Use your voice loudly\n• Escape if possible\n• Carry safety tools";
+
+  if (safetyWords.some(word => msg.includes(word))) return "💡 Safety tips:\n• Avoid dark/isolated areas\n• Share location with family/friends\n• Trust your instincts\n• Keep emergency numbers handy";
+
+  if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey")) return "Hello 👋 I’m here to help you stay safe.";
+
+  // Default fallback
+  return "I can help with:\n• Emergency help\n• Helpline numbers\n• Safety tips\n• Laws for women\nPlease ask clearly 💙";
+}
+
+</script>
 
 
 <!-- Testimonials -->
@@ -1218,6 +1416,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script src="script.js"></script>
+
 
   </body>
   

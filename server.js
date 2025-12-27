@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
+
 // -------------------------
 // MONGODB CONNECTION
 // -------------------------
@@ -318,3 +319,7 @@ app.post("/api/login", async (req, res) => {
 
   res.json({ success: true, user });
 });
+
+
+
+

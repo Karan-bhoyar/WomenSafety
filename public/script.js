@@ -895,3 +895,5 @@ if (savedImage) {
   const profileImg = document.querySelector("#profile-box img");
   if (profileImg) profileImg.src = savedImage;
 }
+
+
