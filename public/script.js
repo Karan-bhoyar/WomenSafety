@@ -784,7 +784,7 @@ document.getElementById("contact-form").addEventListener("submit", async (e) => 
   alert("✅ Message Sent");
   e.target.reset();
 });
-
+// -------------------- SHOW PROFILE FUNCTION --------------------
 function showProfile(user) {
   if (!user) return;
 
@@ -795,24 +795,33 @@ function showProfile(user) {
 
   profileName.innerText = user.firstName || "User";
   profileBox.classList.remove("hidden");
+
+  // Load saved profile image if exists
+  const savedImage = localStorage.getItem("profileImage");
+  const profileImg = profileBox.querySelector("img");
+  if (savedImage && profileImg) {
+    profileImg.src = savedImage;
+  }
 }
 
+// -------------------- ELEMENTS --------------------
 const profileBox = document.getElementById("profile-box");
 const logoutMenu = document.getElementById("logout-menu");
 const logoutBtn = document.getElementById("logout-btn");
 const authButtons = document.getElementById("auth-buttons");
 
-// Show / hide logout on profile click
+// -------------------- TOGGLE LOGOUT MENU --------------------
 profileBox.addEventListener("click", (e) => {
   e.stopPropagation();
   logoutMenu.classList.toggle("hidden");
 });
 
-// Logout
+// -------------------- LOGOUT --------------------
 logoutBtn.addEventListener("click", (e) => {
   e.stopPropagation();
 
   localStorage.removeItem("user"); // clear session
+  localStorage.removeItem("profileImage"); // optional: clear image
 
   profileBox.classList.add("hidden");
   authButtons.classList.remove("hidden");
@@ -821,7 +830,68 @@ logoutBtn.addEventListener("click", (e) => {
   alert("✅ Logged out successfully");
 });
 
-// Close dropdown when clicking outside
+// -------------------- CLOSE DROPDOWN ON OUTSIDE CLICK --------------------
 document.addEventListener("click", () => {
   logoutMenu.classList.add("hidden");
 });
+
+// -------------------- ADD EDIT PROFILE BUTTON --------------------
+const editProfileBtn = document.createElement("button");
+editProfileBtn.id = "edit-profile-btn";
+editProfileBtn.className =
+  "w-full px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-left";
+
+// Icon
+const editIcon = document.createElement("img");
+editIcon.src = "https://cdn-icons-png.flaticon.com/512/1159/1159633.png"; // small edit icon
+editIcon.className = "w-4 h-4";
+
+// Text
+const editText = document.createElement("span");
+editText.innerText = "Edit Profile";
+editText.className = "text-gray-700";
+
+// Append icon + text to button
+editProfileBtn.appendChild(editIcon);
+editProfileBtn.appendChild(editText);
+
+// Insert Edit Profile above logout button
+logoutMenu.insertBefore(editProfileBtn, logoutBtn);
+
+// -------------------- IMAGE UPLOAD FROM COMPUTER --------------------
+// Hidden file input
+const imageInput = document.createElement("input");
+imageInput.type = "file";
+imageInput.accept = "image/*";
+imageInput.style.display = "none";
+document.body.appendChild(imageInput);
+
+// Open file picker on Edit Profile click
+editProfileBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  logoutMenu.classList.add("hidden");
+  imageInput.click();
+});
+
+// When image selected
+imageInput.addEventListener("change", () => {
+  const file = imageInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const profileImg = document.querySelector("#profile-box img");
+    if (profileImg) {
+      profileImg.src = reader.result;
+      localStorage.setItem("profileImage", reader.result);
+    }
+  };
+  reader.readAsDataURL(file);
+});
+
+// -------------------- LOAD SAVED IMAGE ON PAGE REFRESH --------------------
+const savedImage = localStorage.getItem("profileImage");
+if (savedImage) {
+  const profileImg = document.querySelector("#profile-box img");
+  if (profileImg) profileImg.src = savedImage;
+}
